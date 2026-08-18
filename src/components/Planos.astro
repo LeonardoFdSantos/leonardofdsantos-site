@@ -1,0 +1,76 @@
+---
+import { siteConfig } from '../site.config';
+
+const { planos, personal } = siteConfig;
+const waLink = `https://wa.me/${personal.whatsapp}`;
+---
+
+<section id="planos" class="mx-auto max-w-5xl px-4 sm:px-6 py-16 sm:py-24">
+	<div class="text-center">
+		<p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
+			Planos
+		</p>
+		<h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--color-secondary)]">
+			Um plano pra cada momento do seu negócio
+		</h2>
+		<p class="mx-auto mt-3 max-w-xl text-slate-600">
+			Taxa de setup única + mensalidade de manutenção. Sem pegadinha, sem fidelidade.
+		</p>
+	</div>
+	<div class="mt-12 grid gap-8 sm:grid-cols-2">
+		{planos.map((plano) => (
+			<div
+				class:list={[
+					"relative rounded-3xl border p-8 shadow-sm",
+					plano.highlighted ? "border-transparent bg-[var(--color-secondary)] text-white shadow-xl" : "border-slate-200 bg-white",
+				]}
+			>
+				{plano.highlighted && (
+					<span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[var(--color-primary)] px-4 py-1 text-xs font-bold uppercase tracking-wide text-white">
+						Mais popular
+					</span>
+				)}
+				<h3 class:list={["text-xl font-bold", plano.highlighted ? "text-white" : "text-[var(--color-secondary)]"]}>
+					{plano.name}
+				</h3>
+				<p class="mt-5">
+					<span class:list={["text-4xl font-extrabold", plano.highlighted ? "text-white" : "text-[var(--color-primary)]"]}>
+						{plano.setupPrice}
+					</span>
+					<span class:list={["text-sm", plano.highlighted ? "text-white/70" : "text-slate-500"]}> setup</span>
+				</p>
+				<p class:list={["text-sm", plano.highlighted ? "text-white/70" : "text-slate-500"]}>
+					+ {plano.monthlyPrice} de manutenção
+				</p>
+				<ul class="mt-6 space-y-3 text-sm">
+					{plano.features.map((f) => (
+						<li class="flex items-start gap-3">
+							<span
+								class:list={[
+									"mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs",
+									plano.highlighted ? "bg-white/15 text-white" : "bg-[var(--color-primary)]/10 text-[var(--color-primary)]",
+								]}
+							>
+								✓
+							</span>
+							<span class={plano.highlighted ? "text-white/90" : "text-slate-600"}>{f}</span>
+						</li>
+					))}
+				</ul>
+				<a
+					href={waLink}
+					target="_blank"
+					rel="noopener noreferrer"
+					class:list={[
+						"mt-8 block rounded-full px-5 py-3 text-center text-sm font-semibold transition-opacity hover:opacity-90",
+						plano.highlighted
+							? "bg-[var(--color-primary)] text-white"
+							: "border border-slate-300 text-slate-700",
+					]}
+				>
+					Quero esse plano
+				</a>
+			</div>
+		))}
+	</div>
+</section>

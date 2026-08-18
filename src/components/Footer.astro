@@ -1,0 +1,19 @@
+---
+import { siteConfig } from '../site.config';
+
+const { personal } = siteConfig;
+const year = new Date().getFullYear();
+const waLink = `https://wa.me/${personal.whatsapp}`;
+const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}` : undefined;
+---
+
+<footer class="border-t border-slate-100 py-10">
+	<div class="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+		<p class="text-sm text-slate-500">&copy; {year} {personal.name}. Todos os direitos reservados.</p>
+		<div class="flex items-center gap-5 text-sm font-medium text-slate-500">
+			<a href={waLink} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-primary)] transition-colors">WhatsApp</a>
+			{igLink && <a href={igLink} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-primary)] transition-colors">Instagram</a>}
+			<a href="#topo" class="hover:text-[var(--color-primary)] transition-colors">Voltar ao topo ↑</a>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,17 @@
+---
+import { siteConfig } from '../site.config';
+
+const { personal } = siteConfig;
+const waLink = `https://wa.me/${personal.whatsapp}`;
+---
+
+<a
+	href={waLink}
+	target="_blank"
+	rel="noopener noreferrer"
+	aria-label="Falar no WhatsApp"
+	class="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-3xl shadow-lg hover:scale-105 transition-transform"
+>
+	<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-30"></span>
+	<span class="relative">💬</span>
+</a>
