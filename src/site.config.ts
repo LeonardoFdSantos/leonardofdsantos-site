@@ -70,7 +70,7 @@ export const siteConfig: SiteConfig = {
     description:
       "Crio sites institucionais rápidos e com preço acessível pra pequenos comércios que ainda não têm presença online — oficinas, salões, clínicas e mais.",
     city: "Santa Maria - RS",
-    whatsapp: "5555999999999",
+    whatsapp: "5555999921300",
     instagram: "leonardofdsantos",
     email: "leonardo.santos@acad.ufsm.br",
   },
@@ -87,7 +87,7 @@ export const siteConfig: SiteConfig = {
     stats: [
       { value: "4+", label: "sites entregues" },
       { value: "48h", label: "primeira demo pronta" },
-      { value: "R$300", label: "a partir de" },
+      { value: "R$500", label: "a partir de" },
     ],
   },
   about: {
@@ -127,8 +127,8 @@ export const siteConfig: SiteConfig = {
   planos: [
     {
       name: "Plano Essencial",
-      setupPrice: "R$ 300",
-      monthlyPrice: "R$ 50/mês",
+      setupPrice: "R$ 500",
+      monthlyPrice: "R$ 100/mês",
       features: [
         "Site institucional de 1 página",
         "Botão de WhatsApp",
