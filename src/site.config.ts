@@ -10,6 +10,7 @@ export type PortfolioItem = {
   description: string;
   icon: string; // emoji representando o nicho
   url?: string; // link da demo/site publicado (deixe vazio até publicar)
+  status?: "encerrado"; // marque projetos que não estão mais no ar
 };
 
 export type Highlight = {
@@ -101,6 +102,20 @@ export const siteConfig: SiteConfig = {
   },
   portfolio: [
     {
+      name: "EnginQR",
+      niche: "Gestão de Ativos com QR Code",
+      description: "App B2B pra cadastrar, rastrear e manter o histórico de manutenção de ativos via QR Code.",
+      icon: "🏷️",
+      url: "",
+    },
+    {
+      name: "H2UFSM",
+      niche: "Equipe de Competição Universitária",
+      description: "Site institucional da equipe de competição a hidrogênio da UFSM, com foco em captação de patrocínio.",
+      icon: "💧",
+      url: "",
+    },
+    {
       name: "Mecânica Schio",
       niche: "Oficina Mecânica",
       description: "Landing page com tabela de serviços e valores, botão direto pro WhatsApp.",
@@ -127,6 +142,14 @@ export const siteConfig: SiteConfig = {
       description: "Portfólio de obras com galeria de projetos e contato direto com corretor.",
       icon: "🏗️",
       url: "",
+    },
+    {
+      name: "Luma",
+      niche: "Blog",
+      description: "Blog pessoal de conteúdo (lumaconhecimento.com.br) — projeto encerrado.",
+      icon: "📝",
+      url: "",
+      status: "encerrado",
     },
   ],
   planos: [
