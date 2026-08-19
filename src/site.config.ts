@@ -77,7 +77,7 @@ export const defaultSiteConfig: SiteConfig = {
     city: "Santa Maria - RS",
     whatsapp: "5555999921300",
     instagram: "leonardofdsantos",
-    email: "leonardo.santos@acad.ufsm.br",
+    email: "contato@leonardofdsantos.com.br",
   },
   theme: {
     primary: "#2563eb",
