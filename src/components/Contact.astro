@@ -63,31 +63,45 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 				{contact.showForm && (
 					<form
 						id="contact-form"
+						novalidate
 						class="space-y-3"
 						data-web3forms-key={contact.web3formsKey}
 						data-subject={`Novo contato via site pessoal - ${personal.name}`}
 					>
-						<input
-							type="text"
-							name="name"
-							placeholder="Seu nome"
-							required
-							class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none transition-colors"
-						/>
-						<input
-							type="tel"
-							name="phone"
-							placeholder="Seu telefone"
-							required
-							class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none transition-colors"
-						/>
-						<textarea
-							name="message"
-							placeholder="Me conta um pouco sobre seu negócio"
-							rows="4"
-							required
-							class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none transition-colors"
-						></textarea>
+						<div>
+							<input
+								id="contact-name"
+								type="text"
+								name="name"
+								autocomplete="name"
+								placeholder="Seu nome"
+								class="form-input"
+							/>
+							<p id="error-name" class="form-error hidden"></p>
+						</div>
+						<div>
+							<input
+								id="contact-phone"
+								type="tel"
+								name="phone"
+								inputmode="tel"
+								autocomplete="tel"
+								maxlength="15"
+								placeholder="(55) 99999-9999"
+								class="form-input"
+							/>
+							<p id="error-phone" class="form-error hidden"></p>
+						</div>
+						<div>
+							<textarea
+								id="contact-message"
+								name="message"
+								placeholder="Me conta um pouco sobre seu negócio"
+								rows="4"
+								class="form-input"
+							></textarea>
+							<p id="error-message" class="form-error hidden"></p>
+						</div>
 						<button
 							type="submit"
 							class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-60"
@@ -102,61 +116,161 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 	</div>
 </section>
 
+<style>
+	.form-input {
+		width: 100%;
+		border-radius: 0.5rem;
+		border: 1px solid rgb(226 232 240);
+		background: rgb(248 250 252);
+		padding: 0.75rem 1rem;
+		font-size: 0.875rem;
+		transition: border-color 0.15s, background-color 0.15s;
+	}
+	.form-input:focus {
+		outline: none;
+		border-color: var(--color-primary);
+		background: white;
+	}
+	.form-input.is-invalid {
+		border-color: rgb(248 113 113);
+	}
+	.form-error {
+		margin-top: 0.375rem;
+		font-size: 0.75rem;
+		color: rgb(220 38 38);
+	}
+</style>
+
 <script>
 	import { supabase } from '../lib/supabase';
 
 	const form = document.querySelector<HTMLFormElement>('#contact-form');
 	const statusEl = document.querySelector<HTMLElement>('#contact-status');
 
-	form?.addEventListener('submit', async (e) => {
-		e.preventDefault();
-		if (!statusEl) return;
+	if (form) {
+		const nameInput = document.getElementById('contact-name') as HTMLInputElement;
+		const phoneInput = document.getElementById('contact-phone') as HTMLInputElement;
+		const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+		const errorName = document.getElementById('error-name') as HTMLElement;
+		const errorPhone = document.getElementById('error-phone') as HTMLElement;
+		const errorMessage = document.getElementById('error-message') as HTMLElement;
 
-		const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-		submitBtn.disabled = true;
-
-		const fd = new FormData(form);
-		const name = String(fd.get('name') ?? '');
-		const phone = String(fd.get('phone') ?? '');
-		const message = String(fd.get('message') ?? '');
-
-		// Guarda o lead no Supabase pra aparecer no /admin. Se o Supabase
-		// não estiver configurado ainda, apenas segue pro Web3Forms.
-		if (supabase) {
-			await supabase.from('leads').insert({ name, phone, message }).then(
-				() => {},
-				() => {} // falha silenciosa aqui — o e-mail via Web3Forms abaixo é o fallback
-			);
+		// Formata o telefone conforme digita: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+		function formatPhone(value: string) {
+			const digits = value.replace(/\D/g, '').slice(0, 11);
+			if (digits.length <= 2) return digits.length ? `(${digits}` : '';
+			if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+			if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+			return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 		}
 
-		try {
-			const web3formsKey = form.dataset.web3formsKey;
-			const res = await fetch('https://api.web3forms.com/submit', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-				body: JSON.stringify({
-					access_key: web3formsKey,
-					subject: form.dataset.subject,
-					name,
-					phone,
-					message,
-				}),
-			});
-			const data = await res.json();
+		phoneInput.addEventListener('input', () => {
+			phoneInput.value = formatPhone(phoneInput.value);
+		});
 
-			if (data.success) {
-				statusEl.textContent = 'Mensagem enviada! Te respondo em breve 🙂';
-				statusEl.className = 'text-sm text-emerald-600';
-				form.reset();
+		function validateName(value: string): string | null {
+			const v = value.trim();
+			if (!v) return 'Digite seu nome.';
+			if (v.length < 2) return 'Nome muito curto.';
+			if (!/^[\p{L}\s'-]+$/u.test(v)) return 'Use só letras nesse campo.';
+			return null;
+		}
+
+		function validatePhone(value: string): string | null {
+			const digits = value.replace(/\D/g, '');
+			if (!digits) return 'Digite seu WhatsApp.';
+			if (digits.length < 10 || digits.length > 11) return 'Telefone inválido — inclua o DDD (ex: (55) 99999-9999).';
+			return null;
+		}
+
+		function validateMessage(value: string): string | null {
+			const v = value.trim();
+			if (!v) return 'Escreve uma mensagem pra gente entender o que você precisa.';
+			if (v.length < 10) return 'Conta um pouco mais — essa mensagem ainda tá curta.';
+			return null;
+		}
+
+		function showFieldError(input: HTMLInputElement | HTMLTextAreaElement, errorEl: HTMLElement, message: string | null) {
+			if (message) {
+				errorEl.textContent = message;
+				errorEl.classList.remove('hidden');
+				input.classList.add('is-invalid');
 			} else {
-				throw new Error(data.message || 'Falha no envio');
+				errorEl.classList.add('hidden');
+				input.classList.remove('is-invalid');
 			}
-		} catch {
-			statusEl.textContent = 'Não consegui enviar agora — chama no WhatsApp que é mais rápido.';
-			statusEl.className = 'text-sm text-red-600';
-		} finally {
-			statusEl.classList.remove('hidden');
-			submitBtn.disabled = false;
 		}
-	});
+
+		nameInput.addEventListener('blur', () => showFieldError(nameInput, errorName, validateName(nameInput.value)));
+		phoneInput.addEventListener('blur', () => showFieldError(phoneInput, errorPhone, validatePhone(phoneInput.value)));
+		messageInput.addEventListener('blur', () => showFieldError(messageInput, errorMessage, validateMessage(messageInput.value)));
+
+		function validateForm(): boolean {
+			const nameErr = validateName(nameInput.value);
+			const phoneErr = validatePhone(phoneInput.value);
+			const messageErr = validateMessage(messageInput.value);
+			showFieldError(nameInput, errorName, nameErr);
+			showFieldError(phoneInput, errorPhone, phoneErr);
+			showFieldError(messageInput, errorMessage, messageErr);
+
+			const firstInvalid = nameErr ? nameInput : phoneErr ? phoneInput : messageErr ? messageInput : null;
+			firstInvalid?.focus();
+
+			return !nameErr && !phoneErr && !messageErr;
+		}
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			if (!statusEl) return;
+
+			statusEl.classList.add('hidden');
+			if (!validateForm()) return;
+
+			const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+			submitBtn.disabled = true;
+
+			const name = nameInput.value.trim();
+			const phone = phoneInput.value.trim();
+			const message = messageInput.value.trim();
+
+			// Guarda o lead no Supabase pra aparecer no /admin. Se o Supabase
+			// não estiver configurado ainda, apenas segue pro Web3Forms.
+			if (supabase) {
+				await supabase.from('leads').insert({ name, phone, message }).then(
+					() => {},
+					() => {} // falha silenciosa aqui — o e-mail via Web3Forms abaixo é o fallback
+				);
+			}
+
+			try {
+				const web3formsKey = form.dataset.web3formsKey;
+				const res = await fetch('https://api.web3forms.com/submit', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+					body: JSON.stringify({
+						access_key: web3formsKey,
+						subject: form.dataset.subject,
+						name,
+						phone,
+						message,
+					}),
+				});
+				const data = await res.json();
+
+				if (data.success) {
+					statusEl.textContent = 'Mensagem enviada! Te respondo em breve 🙂';
+					statusEl.className = 'text-sm text-emerald-600';
+					form.reset();
+				} else {
+					throw new Error(data.message || 'Falha no envio');
+				}
+			} catch {
+				statusEl.textContent = 'Não consegui enviar agora — chama no WhatsApp que é mais rápido.';
+				statusEl.className = 'text-sm text-red-600';
+			} finally {
+				statusEl.classList.remove('hidden');
+				submitBtn.disabled = false;
+			}
+		});
+	}
 </script>
