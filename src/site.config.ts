@@ -38,6 +38,7 @@ export interface SiteConfig {
     whatsapp: string; // dígitos com DDI
     instagram?: string;
     email?: string;
+    photo?: string; // foto de perfil (URL) — mostrada no hero. Sem ela, cai pra logo.
   };
   theme: {
     primary: string;
@@ -82,6 +83,7 @@ export const defaultSiteConfig: SiteConfig = {
     whatsapp: "5555999921300",
     instagram: "leonardofdsantos",
     email: "contato@leonardofdsantos.com.br",
+    photo: "/leonardo.jpg",
   },
   theme: {
     primary: "#2563eb",

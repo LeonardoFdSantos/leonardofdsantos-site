@@ -59,7 +59,15 @@ const waLink = `https://wa.me/${personal.whatsapp}`;
 
 			<div class="hidden lg:flex justify-center">
 				<div class="relative">
-					<Logo class="h-72 w-72 rounded-[2.5rem] shadow-2xl shadow-[var(--color-primary)]/30" id="logo-hero" />
+					{personal.photo ? (
+						<img
+							src={personal.photo}
+							alt={personal.name}
+							class="h-72 w-72 rounded-[2.5rem] object-cover shadow-2xl shadow-[var(--color-primary)]/30"
+						/>
+					) : (
+						<Logo class="h-72 w-72 rounded-[2.5rem] shadow-2xl shadow-[var(--color-primary)]/30" id="logo-hero" />
+					)}
 					<span class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-5 py-2 text-sm font-semibold text-[var(--color-secondary)] shadow-md">
 						{personal.role}
 					</span>

@@ -89,6 +89,11 @@ import { defaultSiteConfig } from '../../site.config';
 						<label class="field-group"><span class="label">WhatsApp (só dígitos, com DDI)</span><input data-field="personal.whatsapp" class="field" /></label>
 						<label class="field-group"><span class="label">Instagram (sem @)</span><input data-field="personal.instagram" class="field" /></label>
 						<label class="field-group"><span class="label">E-mail</span><input data-field="personal.email" class="field" /></label>
+						<label class="field-group sm:col-span-2">
+							<span class="label">Foto de perfil — URL (aparece no hero; sem ela, mostra a logo)</span>
+							<input id="personal-photo-input" data-field="personal.photo" class="field" />
+						</label>
+						<img id="personal-photo-preview" class="hidden h-24 w-24 rounded-2xl border border-slate-200 object-cover" />
 					</div>
 				</div>
 
@@ -375,6 +380,17 @@ import { defaultSiteConfig } from '../../site.config';
 			img.classList.remove('hidden');
 		}
 
+		function renderPersonalPhotoPreview() {
+			const input = document.getElementById('personal-photo-input') as HTMLInputElement;
+			const img = document.getElementById('personal-photo-preview') as HTMLImageElement;
+			if (!input?.value) {
+				img.classList.add('hidden');
+				return;
+			}
+			img.src = input.value;
+			img.classList.remove('hidden');
+		}
+
 		async function loadContent() {
 			const { data, error } = await supabase.from('site_content').select('data').eq('id', 'main').maybeSingle();
 			currentContent = !error && data?.data ? (data.data as SiteConfig) : structuredClone(defaultSiteConfig);
@@ -396,8 +412,10 @@ import { defaultSiteConfig } from '../../site.config';
 
 			renderPhotoPreviews();
 			renderOgImagePreview();
+			renderPersonalPhotoPreview();
 			document.getElementById('about-photos-input')?.addEventListener('input', renderPhotoPreviews);
 			document.getElementById('og-image-input')?.addEventListener('input', renderOgImagePreview);
+			document.getElementById('personal-photo-input')?.addEventListener('input', renderPersonalPhotoPreview);
 		}
 
 		$('#save-btn').addEventListener('click', async () => {
