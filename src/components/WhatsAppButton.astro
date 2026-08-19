@@ -1,7 +1,11 @@
 ---
-import { siteConfig } from '../site.config';
+import type { SiteConfig } from '../site.config';
 
-const { personal } = siteConfig;
+interface Props {
+	siteConfig: SiteConfig;
+}
+
+const { personal } = Astro.props.siteConfig;
 const waLink = `https://wa.me/${personal.whatsapp}`;
 ---
 

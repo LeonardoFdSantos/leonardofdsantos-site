@@ -1,0 +1,360 @@
+---
+// Painel de administração: login (Supabase Auth) + editor de conteúdo +
+// lista de leads. Tudo roda client-side (o HTML desta página não tem
+// nenhum dado sensível — a proteção real é o RLS do Supabase: sem
+// sessão autenticada, não dá pra ler leads nem gravar conteúdo).
+import Layout from '../../layouts/Layout.astro';
+import { defaultSiteConfig } from '../../site.config';
+---
+
+<Layout siteConfig={defaultSiteConfig} title="Admin — leonardofdsantos.com.br" description="Painel administrativo" noindex>
+	<div class="mx-auto max-w-4xl px-4 sm:px-6 py-12">
+		<div id="admin-unconfigured" class="hidden rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-800">
+			<h1 class="text-lg font-bold">Supabase não configurado</h1>
+			<p class="mt-2 text-sm">
+				Defina <code class="rounded bg-amber-100 px-1">PUBLIC_SUPABASE_URL</code> e
+				<code class="rounded bg-amber-100 px-1">PUBLIC_SUPABASE_ANON_KEY</code> no
+				<code class="rounded bg-amber-100 px-1">.env</code> (veja o README) e reinicie o site.
+			</p>
+		</div>
+
+		<div id="admin-login" class="hidden mx-auto max-w-sm py-16">
+			<h1 class="text-2xl font-bold text-[var(--color-secondary)]">Entrar</h1>
+			<p class="mt-1 text-sm text-slate-500">Acesso restrito ao administrador do site.</p>
+			<form id="login-form" class="mt-6 space-y-3">
+				<input
+					type="email"
+					id="login-email"
+					placeholder="E-mail"
+					required
+					class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none"
+				/>
+				<input
+					type="password"
+					id="login-password"
+					placeholder="Senha"
+					required
+					class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none"
+				/>
+				<button
+					type="submit"
+					class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+				>
+					Entrar
+				</button>
+				<p id="login-error" class="hidden text-sm text-red-600"></p>
+			</form>
+		</div>
+
+		<div id="admin-dashboard" class="hidden">
+			<div class="flex items-center justify-between">
+				<h1 class="text-2xl font-bold text-[var(--color-secondary)]">Painel</h1>
+				<button id="logout-btn" class="text-sm font-medium text-slate-500 hover:text-[var(--color-primary)]">Sair</button>
+			</div>
+
+			<div class="mt-6 flex gap-2 border-b border-slate-200">
+				<button data-tab="conteudo" class="tab-btn border-b-2 border-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)]">
+					Conteúdo
+				</button>
+				<button data-tab="leads" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-semibold text-slate-500">
+					Leads
+				</button>
+			</div>
+
+			<section id="tab-conteudo" class="tab-panel mt-8 space-y-8">
+				<p id="save-status" class="hidden rounded-lg px-4 py-2.5 text-sm"></p>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Dados pessoais</h2>
+					<div class="mt-3 grid gap-3 sm:grid-cols-2">
+						<input data-field="personal.name" placeholder="Nome" class="field" />
+						<input data-field="personal.role" placeholder="Cargo/atuação" class="field" />
+						<input data-field="personal.tagline" placeholder="Tagline curta" class="field sm:col-span-2" />
+						<textarea data-field="personal.description" placeholder="Descrição" rows="2" class="field sm:col-span-2"></textarea>
+						<input data-field="personal.city" placeholder="Cidade" class="field" />
+						<input data-field="personal.whatsapp" placeholder="WhatsApp (só dígitos, com DDI)" class="field" />
+						<input data-field="personal.instagram" placeholder="Instagram (sem @)" class="field" />
+						<input data-field="personal.email" placeholder="E-mail" class="field" />
+					</div>
+				</div>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Cores do tema</h2>
+					<div class="mt-3 grid gap-3 sm:grid-cols-2">
+						<input data-field="theme.primary" placeholder="Cor primária (hex)" class="field" />
+						<input data-field="theme.secondary" placeholder="Cor secundária (hex)" class="field" />
+					</div>
+				</div>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Hero</h2>
+					<div class="mt-3 grid gap-3">
+						<input data-field="hero.badge" placeholder="Badge (ex: Disponível pra novos projetos)" class="field" />
+						<input data-field="hero.headline" placeholder="Título principal" class="field" />
+						<textarea data-field="hero.subheadline" placeholder="Subtítulo" rows="2" class="field"></textarea>
+						<input data-field="hero.ctaText" placeholder="Texto do botão" class="field" />
+						<label class="text-xs font-medium text-slate-500">Estatísticas (JSON — array de {`{value, label}`})</label>
+						<textarea data-field-json="hero.stats" rows="5" class="field font-mono text-xs"></textarea>
+					</div>
+				</div>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Sobre</h2>
+					<div class="mt-3 grid gap-3">
+						<input data-field="about.title" placeholder="Título da seção" class="field" />
+						<textarea data-field="about.text" placeholder="Texto" rows="3" class="field"></textarea>
+						<label class="text-xs font-medium text-slate-500">Diferenciais (JSON — array de {`{icon, title, text}`})</label>
+						<textarea data-field-json="about.highlights" rows="6" class="field font-mono text-xs"></textarea>
+					</div>
+				</div>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Portfólio</h2>
+					<label class="mt-3 block text-xs font-medium text-slate-500">
+						JSON — array de {`{name, niche, description, icon, url?, status?: "encerrado"}`}
+					</label>
+					<textarea data-field-json="portfolio" rows="10" class="field font-mono text-xs mt-1"></textarea>
+				</div>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Planos</h2>
+					<label class="mt-3 block text-xs font-medium text-slate-500">
+						JSON — array de {`{name, setupPrice, monthlyPrice, features: string[], highlighted?}`}
+					</label>
+					<textarea data-field-json="planos" rows="12" class="field font-mono text-xs mt-1"></textarea>
+				</div>
+
+				<div>
+					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Contato</h2>
+					<div class="mt-3 grid gap-3 sm:grid-cols-2">
+						<input data-field="contact.web3formsKey" placeholder="Chave Web3Forms" class="field" />
+						<label class="flex items-center gap-2 text-sm text-slate-600">
+							<input type="checkbox" data-field-checkbox="contact.showForm" />
+							Mostrar formulário de contato
+						</label>
+					</div>
+				</div>
+
+				<button
+					id="save-btn"
+					class="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+				>
+					Salvar alterações
+				</button>
+			</section>
+
+			<section id="tab-leads" class="tab-panel mt-8 hidden">
+				<div class="overflow-x-auto rounded-2xl border border-slate-100">
+					<table class="w-full text-left text-sm">
+						<thead class="bg-slate-50 text-slate-500">
+							<tr>
+								<th class="px-4 py-3 font-semibold">Nome</th>
+								<th class="px-4 py-3 font-semibold">Telefone</th>
+								<th class="px-4 py-3 font-semibold">Mensagem</th>
+								<th class="px-4 py-3 font-semibold">Data</th>
+								<th class="px-4 py-3 font-semibold"></th>
+							</tr>
+						</thead>
+						<tbody id="leads-tbody" class="divide-y divide-slate-100"></tbody>
+					</table>
+				</div>
+				<p id="leads-empty" class="hidden mt-6 text-center text-sm text-slate-400">Nenhum lead ainda.</p>
+			</section>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.field {
+		width: 100%;
+		border-radius: 0.5rem;
+		border: 1px solid rgb(226 232 240);
+		background: rgb(248 250 252);
+		padding: 0.625rem 1rem;
+		font-size: 0.875rem;
+	}
+	.field:focus {
+		outline: none;
+		border-color: var(--color-primary);
+		background: white;
+	}
+</style>
+
+<script>
+	import { supabase, isSupabaseConfigured } from '../../lib/supabase';
+	import { defaultSiteConfig, type SiteConfig } from '../../site.config';
+
+	const $ = (sel: string) => document.querySelector(sel) as HTMLElement;
+
+	const unconfiguredEl = $('#admin-unconfigured');
+	const loginEl = $('#admin-login');
+	const dashboardEl = $('#admin-dashboard');
+
+	if (!isSupabaseConfigured || !supabase) {
+		unconfiguredEl.classList.remove('hidden');
+	} else {
+		init(supabase);
+	}
+
+	function init(supabase: NonNullable<typeof import('../../lib/supabase').supabase>) {
+		let currentContent: SiteConfig = defaultSiteConfig;
+
+		// --- Auth ---
+		supabase.auth.getSession().then(({ data }) => {
+			if (data.session) showDashboard();
+			else showLogin();
+		});
+
+		function showLogin() {
+			loginEl.classList.remove('hidden');
+			dashboardEl.classList.add('hidden');
+		}
+
+		async function showDashboard() {
+			loginEl.classList.add('hidden');
+			dashboardEl.classList.remove('hidden');
+			await loadContent();
+			await loadLeads();
+		}
+
+		$('#login-form').addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const email = (document.getElementById('login-email') as HTMLInputElement).value;
+			const password = (document.getElementById('login-password') as HTMLInputElement).value;
+			const errorEl = $('#login-error');
+			const { error } = await supabase.auth.signInWithPassword({ email, password });
+			if (error) {
+				errorEl.textContent = 'E-mail ou senha inválidos.';
+				errorEl.classList.remove('hidden');
+				return;
+			}
+			errorEl.classList.add('hidden');
+			showDashboard();
+		});
+
+		$('#logout-btn').addEventListener('click', async () => {
+			await supabase.auth.signOut();
+			showLogin();
+		});
+
+		// --- Tabs ---
+		document.querySelectorAll<HTMLButtonElement>('.tab-btn').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				document.querySelectorAll('.tab-btn').forEach((b) => {
+					b.classList.remove('border-[var(--color-primary)]', 'text-[var(--color-primary)]');
+					b.classList.add('border-transparent', 'text-slate-500');
+				});
+				btn.classList.add('border-[var(--color-primary)]', 'text-[var(--color-primary)]');
+				btn.classList.remove('border-transparent', 'text-slate-500');
+
+				document.querySelectorAll('.tab-panel').forEach((p) => p.classList.add('hidden'));
+				$(`#tab-${btn.dataset.tab}`).classList.remove('hidden');
+			});
+		});
+
+		// --- Conteúdo: carregar/salvar ---
+		function getByPath(obj: any, path: string) {
+			return path.split('.').reduce((acc, key) => acc?.[key], obj);
+		}
+		function setByPath(obj: any, path: string, value: unknown) {
+			const keys = path.split('.');
+			const last = keys.pop()!;
+			const target = keys.reduce((acc, key) => acc[key], obj);
+			target[last] = value;
+		}
+
+		async function loadContent() {
+			const { data, error } = await supabase.from('site_content').select('data').eq('id', 'main').maybeSingle();
+			currentContent = !error && data?.data ? (data.data as SiteConfig) : structuredClone(defaultSiteConfig);
+
+			document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-field]').forEach((el) => {
+				el.value = getByPath(currentContent, el.dataset.field!) ?? '';
+			});
+			document.querySelectorAll<HTMLTextAreaElement>('[data-field-json]').forEach((el) => {
+				el.value = JSON.stringify(getByPath(currentContent, el.dataset.fieldJson!) ?? [], null, 2);
+			});
+			document.querySelectorAll<HTMLInputElement>('[data-field-checkbox]').forEach((el) => {
+				el.checked = Boolean(getByPath(currentContent, el.dataset.fieldCheckbox!));
+			});
+		}
+
+		$('#save-btn').addEventListener('click', async () => {
+			const statusEl = $('#save-status');
+			const updated: SiteConfig = structuredClone(currentContent);
+
+			try {
+				document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-field]').forEach((el) => {
+					setByPath(updated, el.dataset.field!, el.value);
+				});
+				document.querySelectorAll<HTMLTextAreaElement>('[data-field-json]').forEach((el) => {
+					setByPath(updated, el.dataset.fieldJson!, JSON.parse(el.value));
+				});
+				document.querySelectorAll<HTMLInputElement>('[data-field-checkbox]').forEach((el) => {
+					setByPath(updated, el.dataset.fieldCheckbox!, el.checked);
+				});
+			} catch {
+				statusEl.textContent = 'Algum campo JSON está com formato inválido — confira colchetes/vírgulas.';
+				statusEl.className = 'rounded-lg px-4 py-2.5 text-sm bg-red-50 text-red-700';
+				return;
+			}
+
+			const { error } = await supabase
+				.from('site_content')
+				.upsert({ id: 'main', data: updated, updated_at: new Date().toISOString() });
+
+			if (error) {
+				statusEl.textContent = `Erro ao salvar: ${error.message}`;
+				statusEl.className = 'rounded-lg px-4 py-2.5 text-sm bg-red-50 text-red-700';
+			} else {
+				currentContent = updated;
+				statusEl.textContent = 'Salvo! O site já reflete as mudanças.';
+				statusEl.className = 'rounded-lg px-4 py-2.5 text-sm bg-emerald-50 text-emerald-700';
+			}
+		});
+
+		// --- Leads ---
+		async function loadLeads() {
+			const tbody = $('#leads-tbody');
+			const emptyEl = $('#leads-empty');
+			const { data, error } = await supabase
+				.from('leads')
+				.select('*')
+				.order('created_at', { ascending: false });
+
+			tbody.innerHTML = '';
+			if (error || !data || data.length === 0) {
+				emptyEl.classList.remove('hidden');
+				return;
+			}
+			emptyEl.classList.add('hidden');
+
+			for (const lead of data) {
+				const tr = document.createElement('tr');
+				const date = new Date(lead.created_at).toLocaleString('pt-BR');
+				tr.innerHTML = `
+					<td class="px-4 py-3 font-medium">${escapeHtml(lead.name)}</td>
+					<td class="px-4 py-3">${escapeHtml(lead.phone)}</td>
+					<td class="px-4 py-3 max-w-xs truncate" title="${escapeHtml(lead.message)}">${escapeHtml(lead.message)}</td>
+					<td class="px-4 py-3 text-slate-500">${date}</td>
+					<td class="px-4 py-3 text-right">
+						<button data-delete-lead="${lead.id}" class="text-red-500 hover:underline">Excluir</button>
+					</td>
+				`;
+				tbody.appendChild(tr);
+			}
+
+			tbody.querySelectorAll<HTMLButtonElement>('[data-delete-lead]').forEach((btn) => {
+				btn.addEventListener('click', async () => {
+					await supabase.from('leads').delete().eq('id', btn.dataset.deleteLead);
+					loadLeads();
+				});
+			});
+		}
+
+		function escapeHtml(str: string) {
+			const div = document.createElement('div');
+			div.textContent = str;
+			return div.innerHTML;
+		}
+	}
+</script>

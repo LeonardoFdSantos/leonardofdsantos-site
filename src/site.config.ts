@@ -62,7 +62,11 @@ export interface SiteConfig {
   };
 }
 
-export const siteConfig: SiteConfig = {
+// Conteúdo padrão / de fallback — usado no primeiro build e sempre que o
+// Supabase não estiver configurado ou a busca falhar (ver src/lib/content.ts).
+// Depois que o admin (/admin) salvar uma edição, o site passa a servir o
+// conteúdo do banco em vez deste aqui.
+export const defaultSiteConfig: SiteConfig = {
   personal: {
     name: "Leonardo Felipe da Silva dos Santos",
     role: "Criação de sites institucionais",
@@ -147,6 +151,17 @@ export const siteConfig: SiteConfig = {
         "Prioridade no suporte",
       ],
       highlighted: true,
+    },
+    {
+      name: "Plano Premium",
+      setupPrice: "R$ 2.000",
+      monthlyPrice: "R$ 250/mês",
+      features: [
+        "Painel/CRM próprio (Next.js + Supabase)",
+        "Múltiplas páginas e integrações personalizadas",
+        "Login e área restrita para o cliente",
+        "Suporte prioritário com reuniões de acompanhamento",
+      ],
     },
   ],
   contact: {

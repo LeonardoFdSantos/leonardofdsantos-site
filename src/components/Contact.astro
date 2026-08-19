@@ -1,7 +1,11 @@
 ---
-import { siteConfig } from '../site.config';
+import type { SiteConfig } from '../site.config';
 
-const { personal, contact } = siteConfig;
+interface Props {
+	siteConfig: SiteConfig;
+}
+
+const { personal, contact } = Astro.props.siteConfig;
 const waLink = `https://wa.me/${personal.whatsapp}`;
 const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}` : undefined;
 ---
@@ -57,9 +61,12 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 				</div>
 
 				{contact.showForm && (
-					<form action="https://api.web3forms.com/submit" method="POST" class="space-y-3">
-						<input type="hidden" name="access_key" value={contact.web3formsKey} />
-						<input type="hidden" name="subject" value={`Novo contato via site pessoal - ${personal.name}`} />
+					<form
+						id="contact-form"
+						class="space-y-3"
+						data-web3forms-key={contact.web3formsKey}
+						data-subject={`Novo contato via site pessoal - ${personal.name}`}
+					>
 						<input
 							type="text"
 							name="name"
@@ -83,13 +90,73 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 						></textarea>
 						<button
 							type="submit"
-							class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+							class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-60"
 						>
 							Enviar mensagem
 						</button>
+						<p id="contact-status" class="hidden text-sm"></p>
 					</form>
 				)}
 			</div>
 		</div>
 	</div>
 </section>
+
+<script>
+	import { supabase } from '../lib/supabase';
+
+	const form = document.querySelector<HTMLFormElement>('#contact-form');
+	const statusEl = document.querySelector<HTMLElement>('#contact-status');
+
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		if (!statusEl) return;
+
+		const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+		submitBtn.disabled = true;
+
+		const fd = new FormData(form);
+		const name = String(fd.get('name') ?? '');
+		const phone = String(fd.get('phone') ?? '');
+		const message = String(fd.get('message') ?? '');
+
+		// Guarda o lead no Supabase pra aparecer no /admin. Se o Supabase
+		// não estiver configurado ainda, apenas segue pro Web3Forms.
+		if (supabase) {
+			await supabase.from('leads').insert({ name, phone, message }).then(
+				() => {},
+				() => {} // falha silenciosa aqui — o e-mail via Web3Forms abaixo é o fallback
+			);
+		}
+
+		try {
+			const web3formsKey = form.dataset.web3formsKey;
+			const res = await fetch('https://api.web3forms.com/submit', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify({
+					access_key: web3formsKey,
+					subject: form.dataset.subject,
+					name,
+					phone,
+					message,
+				}),
+			});
+			const data = await res.json();
+
+			if (data.success) {
+				statusEl.textContent = 'Mensagem enviada! Te respondo em breve 🙂';
+				statusEl.className = 'text-sm text-emerald-600';
+				form.reset();
+			} else {
+				throw new Error(data.message || 'Falha no envio');
+			}
+		} catch {
+			statusEl.textContent = 'Não consegui enviar agora — chama no WhatsApp que é mais rápido.';
+			statusEl.className = 'text-sm text-red-600';
+		} finally {
+			statusEl.classList.remove('hidden');
+			submitBtn.disabled = false;
+		}
+	});
+</script>

@@ -4,9 +4,13 @@
 // preencha o campo "url" em site.config.ts assim que publicar na Netlify.
 // Projetos com status "encerrado" aparecem esmaecidos, com um selo
 // indicando que não estão mais no ar (ex: Luma).
-import { siteConfig } from '../site.config';
+import type { SiteConfig } from '../site.config';
 
-const { portfolio } = siteConfig;
+interface Props {
+	siteConfig: SiteConfig;
+}
+
+const { portfolio } = Astro.props.siteConfig;
 ---
 
 <section id="portfolio" class="bg-slate-50 py-16 sm:py-24">

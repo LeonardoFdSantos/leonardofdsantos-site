@@ -1,7 +1,11 @@
 ---
-import { siteConfig } from '../site.config';
+import type { SiteConfig } from '../site.config';
 
-const { about } = siteConfig;
+interface Props {
+	siteConfig: SiteConfig;
+}
+
+const { about } = Astro.props.siteConfig;
 ---
 
 <section id="sobre" class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24">

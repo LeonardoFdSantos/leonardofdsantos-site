@@ -1,13 +1,15 @@
 ---
 import '../styles/global.css';
-import { siteConfig } from '../site.config';
+import type { SiteConfig } from '../site.config';
 
 interface Props {
+  siteConfig: SiteConfig;
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { personal, theme } = siteConfig;
+const { personal, theme } = Astro.props.siteConfig;
 const title = Astro.props.title ?? `${personal.name} - ${personal.role}`;
 const description = Astro.props.description ?? personal.description;
 ---
@@ -26,6 +28,7 @@ const description = Astro.props.description ?? personal.description;
 		/>
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
+		{Astro.props.noindex && <meta name="robots" content="noindex, nofollow" />}
 		<title>{title}</title>
 	</head>
 	<body class="bg-white text-slate-800 antialiased">

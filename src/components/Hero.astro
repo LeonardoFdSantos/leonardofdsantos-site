@@ -1,7 +1,11 @@
 ---
-import { siteConfig } from '../site.config';
+import type { SiteConfig } from '../site.config';
 
-const { personal, hero } = siteConfig;
+interface Props {
+	siteConfig: SiteConfig;
+}
+
+const { personal, hero } = Astro.props.siteConfig;
 const waLink = `https://wa.me/${personal.whatsapp}`;
 const nameParts = personal.name.trim().split(/\s+/);
 const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
