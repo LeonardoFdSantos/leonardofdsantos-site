@@ -164,6 +164,17 @@ const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperC
 					</div>
 				</div>
 
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">🔗</span> Compartilhamento (SEO)</h2>
+					<div class="mt-4 grid gap-4">
+						<label class="field-group">
+							<span class="label">Imagem de preview — aparece quando o link é compartilhado (1200x630 recomendado)</span>
+							<input id="og-image-input" data-field="seo.ogImage" class="field" />
+						</label>
+						<img id="og-image-preview" class="hidden w-full max-w-sm rounded-xl border border-slate-200 object-cover" style="aspect-ratio: 1200/630" />
+					</div>
+				</div>
+
 				<button id="save-btn" class="sticky bottom-6 w-full rounded-full bg-[var(--color-primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-[var(--color-primary)]/30 hover:opacity-90 transition-opacity">
 					Salvar alterações
 				</button>
@@ -359,9 +370,25 @@ const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperC
 			}
 		}
 
+		function renderOgImagePreview() {
+			const input = document.getElementById('og-image-input') as HTMLInputElement;
+			const img = document.getElementById('og-image-preview') as HTMLImageElement;
+			if (!input?.value) {
+				img.classList.add('hidden');
+				return;
+			}
+			img.src = input.value;
+			img.classList.remove('hidden');
+		}
+
 		async function loadContent() {
 			const { data, error } = await supabase.from('site_content').select('data').eq('id', 'main').maybeSingle();
 			currentContent = !error && data?.data ? (data.data as SiteConfig) : structuredClone(defaultSiteConfig);
+
+			// Preenche campos novos (adicionados depois do último save) com o
+			// padrão, pra não aparecer em branco em conteúdo salvo antes deles existirem.
+			currentContent.seo = currentContent.seo ?? structuredClone(defaultSiteConfig.seo);
+			currentContent.about.photos = currentContent.about.photos ?? structuredClone(defaultSiteConfig.about.photos);
 
 			document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-field]').forEach((el) => {
 				el.value = getByPath(currentContent, el.dataset.field!) ?? '';
@@ -374,7 +401,9 @@ const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperC
 			});
 
 			renderPhotoPreviews();
+			renderOgImagePreview();
 			document.getElementById('about-photos-input')?.addEventListener('input', renderPhotoPreviews);
+			document.getElementById('og-image-input')?.addEventListener('input', renderOgImagePreview);
 		}
 
 		$('#save-btn').addEventListener('click', async () => {

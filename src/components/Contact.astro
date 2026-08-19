@@ -102,6 +102,10 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 							></textarea>
 							<p id="error-message" class="form-error hidden"></p>
 						</div>
+						<div class="hp-field" aria-hidden="true">
+							<label for="contact-website">Não preencha este campo</label>
+							<input id="contact-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+						</div>
 						<button
 							type="submit"
 							class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-60"
@@ -139,6 +143,15 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 		font-size: 0.75rem;
 		color: rgb(220 38 38);
 	}
+	/* Honeypot: escondido visualmente e fora da navegação por teclado, mas
+	   presente no DOM — bots que preenchem tudo cegamente caem nele. */
+	.hp-field {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
 </style>
 
 <script>
@@ -151,6 +164,7 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 		const nameInput = document.getElementById('contact-name') as HTMLInputElement;
 		const phoneInput = document.getElementById('contact-phone') as HTMLInputElement;
 		const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+		const honeypotInput = document.getElementById('contact-website') as HTMLInputElement;
 		const errorName = document.getElementById('error-name') as HTMLElement;
 		const errorPhone = document.getElementById('error-phone') as HTMLElement;
 		const errorMessage = document.getElementById('error-message') as HTMLElement;
@@ -224,6 +238,17 @@ const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}
 			if (!statusEl) return;
 
 			statusEl.classList.add('hidden');
+
+			// Honeypot: campo invisível pra humanos. Se veio preenchido, é bot —
+			// finge sucesso e não manda nada pra Supabase/Web3Forms.
+			if (honeypotInput.value) {
+				statusEl.textContent = 'Mensagem enviada! Te respondo em breve 🙂';
+				statusEl.className = 'text-sm text-emerald-600';
+				statusEl.classList.remove('hidden');
+				form.reset();
+				return;
+			}
+
 			if (!validateForm()) return;
 
 			const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;

@@ -61,6 +61,9 @@ export interface SiteConfig {
     web3formsKey: string;
     showForm: boolean;
   };
+  seo: {
+    ogImage: string; // imagem de preview ao compartilhar o link (1200x630 recomendado)
+  };
 }
 
 // Conteúdo padrão / de fallback — usado no primeiro build e sempre que o
@@ -98,11 +101,12 @@ export const defaultSiteConfig: SiteConfig = {
   about: {
     title: "Sobre mim",
     text: "Crio sites institucionais pra pequenos negócios locais que ainda não têm site próprio ou dependem só de indicação. Cada site é feito sob medida, rápido de produzir e com uma mensalidade acessível de manutenção — sem enrolação, sem WordPress.",
-    // Placeholders gratuitos (picsum.photos) — troque pelas suas fotos reais
-    // pelo /admin assim que tiver (aceita qualquer URL de imagem pública).
+    // Fotos reais e gratuitas (Unsplash) de ambiente de código — sem rosto
+    // de propósito, pra não sugerir ser uma foto sua até você trocar pelas
+    // suas de verdade pelo /admin (aceita qualquer URL de imagem pública).
     photos: [
-      "https://picsum.photos/seed/leonardofdsantos-1/800/1000",
-      "https://picsum.photos/seed/leonardofdsantos-2/500/500",
+      "https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?w=800&h=1000&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?w=400&h=400&fit=crop&q=80",
     ],
     highlights: [
       { icon: "⚡", title: "Rápido", text: "Site pronto em poucos dias, não meses." },
@@ -174,5 +178,10 @@ export const defaultSiteConfig: SiteConfig = {
   contact: {
     web3formsKey: "SUA_CHAVE_WEB3FORMS_AQUI",
     showForm: true,
+  },
+  seo: {
+    // Foto real (Unsplash), recortada em 1200x630 — aparece quando o link
+    // é compartilhado no WhatsApp, Instagram, etc.
+    ogImage: "https://images.unsplash.com/photo-1638482856830-16b0e15fcf2c?w=1200&h=630&fit=crop&q=80",
   },
 };
