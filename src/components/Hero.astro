@@ -1,5 +1,6 @@
 ---
 import type { SiteConfig } from '../site.config';
+import Logo from './Logo.astro';
 
 interface Props {
 	siteConfig: SiteConfig;
@@ -7,8 +8,6 @@ interface Props {
 
 const { personal, hero } = Astro.props.siteConfig;
 const waLink = `https://wa.me/${personal.whatsapp}`;
-const nameParts = personal.name.trim().split(/\s+/);
-const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
 ---
 
 <section id="topo" class="relative overflow-hidden bg-white">
@@ -59,9 +58,9 @@ const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperC
 			</div>
 
 			<div class="hidden lg:flex justify-center">
-				<div class="relative flex h-72 w-72 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] shadow-2xl shadow-[var(--color-primary)]/30">
-					<span class="text-7xl font-extrabold text-white">{initials}</span>
-					<span class="absolute -bottom-3 rounded-full bg-white px-5 py-2 text-sm font-semibold text-[var(--color-secondary)] shadow-md">
+				<div class="relative">
+					<Logo class="h-72 w-72 rounded-[2.5rem] shadow-2xl shadow-[var(--color-primary)]/30" id="logo-hero" />
+					<span class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-5 py-2 text-sm font-semibold text-[var(--color-secondary)] shadow-md">
 						{personal.role}
 					</span>
 				</div>

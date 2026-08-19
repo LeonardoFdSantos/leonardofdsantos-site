@@ -4,10 +4,8 @@
 // nenhum dado sensível — a proteção real é o RLS do Supabase: sem
 // sessão autenticada, não dá pra ler leads nem gravar conteúdo).
 import Layout from '../../layouts/Layout.astro';
+import Logo from '../../components/Logo.astro';
 import { defaultSiteConfig } from '../../site.config';
-
-const nameParts = defaultSiteConfig.personal.name.trim().split(/\s+/);
-const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
 ---
 
 <Layout siteConfig={defaultSiteConfig} title="Admin — leonardofdsantos.com.br" description="Painel administrativo" noindex>
@@ -25,9 +23,7 @@ const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperC
 		<div class="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[var(--color-primary)]/15 blur-3xl"></div>
 		<div class="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-[var(--color-secondary)]/10 blur-3xl"></div>
 		<div class="relative mx-auto flex min-h-screen max-w-sm flex-col items-center justify-center px-4 py-16">
-			<div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-xl font-extrabold text-white shadow-lg shadow-[var(--color-primary)]/30">
-				{initials}
-			</div>
+			<Logo class="h-16 w-16 rounded-2xl shadow-lg shadow-[var(--color-primary)]/30" id="logo-admin-login" />
 			<h1 class="mt-5 text-2xl font-bold text-[var(--color-secondary)]">Painel administrativo</h1>
 			<p class="mt-1 text-sm text-slate-500">Acesso restrito ao administrador do site.</p>
 			<form id="login-form" class="mt-8 w-full space-y-3">
@@ -57,9 +53,7 @@ const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperC
 		<header class="sticky top-0 z-20 border-b border-slate-100 bg-white/90 backdrop-blur-md">
 			<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3.5 sm:px-6">
 				<div class="flex items-center gap-2.5">
-					<span class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-sm font-bold text-white">
-						{initials}
-					</span>
+					<Logo class="h-9 w-9 rounded-xl shrink-0" id="logo-admin-dashboard" />
 					<span class="font-bold text-[var(--color-secondary)]">Painel</span>
 				</div>
 				<div class="flex items-center gap-3">

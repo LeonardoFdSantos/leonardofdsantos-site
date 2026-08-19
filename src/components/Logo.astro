@@ -1,0 +1,36 @@
+---
+// Logo: monograma "LS" numa janela de navegador estilizada, com barra de
+// destaque — representa "criação de sites". Cores puxam de --color-primary/
+// --color-secondary (definidas no Layout), então acompanham o tema do site.
+interface Props {
+	class?: string;
+	id?: string;
+}
+
+const { class: className = "h-10 w-10", id = "logo-gradient" } = Astro.props;
+---
+
+<svg viewBox="0 0 200 200" class={className} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo">
+	<defs>
+		<linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="var(--color-primary)" />
+			<stop offset="1" stop-color="var(--color-secondary)" />
+		</linearGradient>
+	</defs>
+	<rect width="200" height="200" rx="46" fill={`url(#${id})`} />
+	<rect x="34" y="40" width="132" height="98" rx="16" fill="#ffffff" opacity="0.08" />
+	<circle cx="52" cy="58" r="4" fill="#ffffff" opacity="0.35" />
+	<circle cx="66" cy="58" r="4" fill="#ffffff" opacity="0.35" />
+	<circle cx="80" cy="58" r="4" fill="#ffffff" opacity="0.35" />
+	<text
+		x="100"
+		y="132"
+		font-family="Arial, Helvetica, sans-serif"
+		font-weight="800"
+		font-size="80"
+		fill="#ffffff"
+		text-anchor="middle"
+		letter-spacing="-3"
+	>LS</text>
+	<rect x="34" y="150" width="132" height="6" rx="3" fill="#38bdf8" />
+</svg>

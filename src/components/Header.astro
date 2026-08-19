@@ -1,5 +1,6 @@
 ---
 import type { SiteConfig } from '../site.config';
+import Logo from './Logo.astro';
 
 interface Props {
 	siteConfig: SiteConfig;
@@ -7,16 +8,12 @@ interface Props {
 
 const { personal } = Astro.props.siteConfig;
 const waLink = `https://wa.me/${personal.whatsapp}`;
-const nameParts = personal.name.trim().split(/\s+/);
-const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
 ---
 
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
 	<div class="mx-auto max-w-6xl px-4 sm:px-6 py-3.5 flex items-center justify-between">
 		<a href="#topo" class="flex items-center gap-2.5">
-			<span class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-sm font-bold text-white">
-				{initials}
-			</span>
+			<Logo class="h-9 w-9 rounded-xl shrink-0" id="logo-header" />
 			<span class="hidden sm:block text-base font-bold tracking-tight text-[var(--color-secondary)]">
 				{personal.name}
 			</span>
