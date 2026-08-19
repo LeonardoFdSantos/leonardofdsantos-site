@@ -9,6 +9,7 @@ export type PortfolioItem = {
   niche: string;
   description: string;
   icon: string; // emoji representando o nicho
+  image?: string; // foto de capa do card (URL pública)
   url?: string; // link da demo/site publicado (deixe vazio até publicar)
   status?: "encerrado"; // marque projetos que não estão mais no ar
 };
@@ -121,6 +122,7 @@ export const defaultSiteConfig: SiteConfig = {
       niche: "Gestão de Ativos com QR Code",
       description: "App B2B pra cadastrar, rastrear e manter o histórico de manutenção de ativos via QR Code.",
       icon: "🏷️",
+      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&h=400&fit=crop&q=75",
       url: "",
     },
     {
@@ -128,6 +130,7 @@ export const defaultSiteConfig: SiteConfig = {
       niche: "Equipe de Competição Universitária",
       description: "Site institucional da equipe de competição a hidrogênio da UFSM, com foco em captação de patrocínio.",
       icon: "💧",
+      image: "https://images.unsplash.com/photo-1451847251646-8a6c0dd1510c?w=600&h=400&fit=crop&q=75",
       url: "",
     },
     {
@@ -135,6 +138,7 @@ export const defaultSiteConfig: SiteConfig = {
       niche: "Blog",
       description: "Blog pessoal de conteúdo (lumaconhecimento.com.br) — projeto encerrado.",
       icon: "📝",
+      image: "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&h=400&fit=crop&q=75",
       url: "",
       status: "encerrado",
     },

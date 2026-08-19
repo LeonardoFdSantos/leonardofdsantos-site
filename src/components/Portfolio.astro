@@ -36,24 +36,30 @@ const { portfolio } = Astro.props.siteConfig;
 							isEncerrado ? "opacity-70" : "hover:shadow-xl hover:-translate-y-1",
 						]}
 					>
-						<div
-							class:list={[
-								"h-1.5",
-								isEncerrado
-									? "bg-slate-300"
-									: "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]",
-							]}
-						/>
+						<div class="relative h-40 overflow-hidden bg-slate-100">
+							{item.image ? (
+								<img
+									src={item.image}
+									alt=""
+									loading="lazy"
+									class:list={[
+										"h-full w-full object-cover transition-transform duration-300",
+										isEncerrado ? "grayscale" : "group-hover:scale-105",
+									]}
+								/>
+							) : (
+								<div class="h-full w-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)]" />
+							)}
+							<div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />
+							<span class="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 text-xl shadow-sm backdrop-blur-sm">
+								{item.icon}
+							</span>
+							<span class="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-600 backdrop-blur-sm">
+								{item.niche}
+							</span>
+						</div>
 						<div class="p-6">
-							<div class="flex items-start justify-between">
-								<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 text-2xl">
-									{item.icon}
-								</div>
-								<span class="rounded-full bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500">
-									{item.niche}
-								</span>
-							</div>
-							<h3 class="mt-4 text-xl font-bold text-[var(--color-secondary)]">{item.name}</h3>
+							<h3 class="text-xl font-bold text-[var(--color-secondary)]">{item.name}</h3>
 							<p class="mt-2 text-sm text-slate-600">{item.description}</p>
 							{isEncerrado ? (
 								<span class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-slate-400">
