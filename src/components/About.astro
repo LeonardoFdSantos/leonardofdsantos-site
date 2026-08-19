@@ -6,10 +6,31 @@ interface Props {
 }
 
 const { about } = Astro.props.siteConfig;
+const [mainPhoto, secondaryPhoto] = about.photos ?? [];
 ---
 
 <section id="sobre" class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24">
 	<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+		{mainPhoto && (
+			<div class="relative order-first lg:order-none">
+				<div class="pointer-events-none absolute -top-8 -left-8 h-40 w-40 rounded-full bg-[var(--color-primary)]/15 blur-3xl"></div>
+				<div class="pointer-events-none absolute -bottom-10 -right-6 h-48 w-48 rounded-full bg-[var(--color-secondary)]/10 blur-3xl"></div>
+				<div class="relative overflow-hidden rounded-[2rem] shadow-2xl shadow-slate-900/10">
+					<img
+						src={mainPhoto}
+						alt="Foto de perfil"
+						class="aspect-[4/5] w-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				{secondaryPhoto && (
+					<div class="absolute -bottom-8 -right-8 hidden h-32 w-32 overflow-hidden rounded-2xl border-4 border-white shadow-xl sm:block">
+						<img src={secondaryPhoto} alt="" class="h-full w-full object-cover" loading="lazy" />
+					</div>
+				)}
+			</div>
+		)}
+
 		<div>
 			<p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
 				Sobre
@@ -20,18 +41,18 @@ const { about } = Astro.props.siteConfig;
 			<p class="mt-5 text-lg leading-relaxed text-slate-600">
 				{about.text}
 			</p>
-		</div>
 
-		<div class="grid gap-4 sm:grid-cols-2">
-			{about.highlights.map((h) => (
-				<div class="rounded-2xl border border-slate-100 bg-slate-50 p-5">
-					<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl shadow-sm">
-						{h.icon}
+			<div class="mt-8 grid gap-4 sm:grid-cols-2">
+				{about.highlights.map((h) => (
+					<div class="rounded-2xl border border-slate-100 bg-slate-50 p-5">
+						<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl shadow-sm">
+							{h.icon}
+						</div>
+						<h3 class="mt-3 font-semibold text-[var(--color-secondary)]">{h.title}</h3>
+						<p class="mt-1 text-sm text-slate-600">{h.text}</p>
 					</div>
-					<h3 class="mt-3 font-semibold text-[var(--color-secondary)]">{h.title}</h3>
-					<p class="mt-1 text-sm text-slate-600">{h.text}</p>
-				</div>
-			))}
+				))}
+			</div>
 		</div>
 	</div>
 </section>

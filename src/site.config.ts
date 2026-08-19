@@ -53,6 +53,7 @@ export interface SiteConfig {
     title: string;
     text: string;
     highlights: Highlight[];
+    photos: string[]; // URLs de imagem — troque pelas suas fotos quando tiver
   };
   portfolio: PortfolioItem[];
   planos: PlanoItem[];
@@ -97,6 +98,12 @@ export const defaultSiteConfig: SiteConfig = {
   about: {
     title: "Sobre mim",
     text: "Crio sites institucionais pra pequenos negócios locais que ainda não têm site próprio ou dependem só de indicação. Cada site é feito sob medida, rápido de produzir e com uma mensalidade acessível de manutenção — sem enrolação, sem WordPress.",
+    // Placeholders gratuitos (picsum.photos) — troque pelas suas fotos reais
+    // pelo /admin assim que tiver (aceita qualquer URL de imagem pública).
+    photos: [
+      "https://picsum.photos/seed/leonardofdsantos-1/800/1000",
+      "https://picsum.photos/seed/leonardofdsantos-2/500/500",
+    ],
     highlights: [
       { icon: "⚡", title: "Rápido", text: "Site pronto em poucos dias, não meses." },
       { icon: "💸", title: "Preço acessível", text: "Setup baixo pensado pra quem tá começando." },

@@ -19,6 +19,11 @@ ar):
 - `contact.web3formsKey` — crie uma chave grátis em
   [web3forms.com](https://web3forms.com) pra receber as mensagens do
   formulário de contato no seu e-mail.
+- `about.photos` — hoje aponta pra fotos placeholder grátis
+  ([picsum.photos](https://picsum.photos)). Troque pelas suas fotos reais
+  quando tiver — pode ser uma URL de qualquer imagem pública (a primeira
+  do array é a foto principal). Dá pra trocar direto pelo `/admin`
+  também, sem precisar editar código.
 - `portfolio[].url` — assim que cada demo em `../site-clientes/` estiver
   publicada (Netlify/Cloudflare), cole o link aqui pra virar um "Ver
   site →" clicável.

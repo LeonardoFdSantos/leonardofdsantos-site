@@ -5,160 +5,176 @@
 // sessão autenticada, não dá pra ler leads nem gravar conteúdo).
 import Layout from '../../layouts/Layout.astro';
 import { defaultSiteConfig } from '../../site.config';
+
+const nameParts = defaultSiteConfig.personal.name.trim().split(/\s+/);
+const initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
 ---
 
 <Layout siteConfig={defaultSiteConfig} title="Admin — leonardofdsantos.com.br" description="Painel administrativo" noindex>
-	<div class="mx-auto max-w-4xl px-4 sm:px-6 py-12">
-		<div id="admin-unconfigured" class="hidden rounded-2xl border border-amber-200 bg-amber-50 p-6 text-amber-800">
-			<h1 class="text-lg font-bold">Supabase não configurado</h1>
-			<p class="mt-2 text-sm">
-				Defina <code class="rounded bg-amber-100 px-1">PUBLIC_SUPABASE_URL</code> e
-				<code class="rounded bg-amber-100 px-1">PUBLIC_SUPABASE_ANON_KEY</code> no
-				<code class="rounded bg-amber-100 px-1">.env</code> (veja o README) e reinicie o site.
-			</p>
-		</div>
+	<div id="admin-unconfigured" class="hidden mx-auto max-w-lg px-4 py-24 text-center">
+		<div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-2xl">⚠️</div>
+		<h1 class="mt-4 text-lg font-bold text-[var(--color-secondary)]">Supabase não configurado</h1>
+		<p class="mt-2 text-sm text-slate-500">
+			Defina <code class="rounded bg-slate-100 px-1.5 py-0.5">PUBLIC_SUPABASE_URL</code> e
+			<code class="rounded bg-slate-100 px-1.5 py-0.5">PUBLIC_SUPABASE_ANON_KEY</code> no
+			<code class="rounded bg-slate-100 px-1.5 py-0.5">.env</code> (veja o README) e reinicie o site.
+		</p>
+	</div>
 
-		<div id="admin-login" class="hidden mx-auto max-w-sm py-16">
-			<h1 class="text-2xl font-bold text-[var(--color-secondary)]">Entrar</h1>
+	<div id="admin-login" class="hidden relative min-h-screen overflow-hidden bg-white">
+		<div class="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[var(--color-primary)]/15 blur-3xl"></div>
+		<div class="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-[var(--color-secondary)]/10 blur-3xl"></div>
+		<div class="relative mx-auto flex min-h-screen max-w-sm flex-col items-center justify-center px-4 py-16">
+			<div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-xl font-extrabold text-white shadow-lg shadow-[var(--color-primary)]/30">
+				{initials}
+			</div>
+			<h1 class="mt-5 text-2xl font-bold text-[var(--color-secondary)]">Painel administrativo</h1>
 			<p class="mt-1 text-sm text-slate-500">Acesso restrito ao administrador do site.</p>
-			<form id="login-form" class="mt-6 space-y-3">
+			<form id="login-form" class="mt-8 w-full space-y-3">
 				<input
 					type="email"
 					id="login-email"
 					placeholder="E-mail"
 					required
-					class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none"
+					class="field"
 				/>
 				<input
 					type="password"
 					id="login-password"
 					placeholder="Senha"
 					required
-					class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-[var(--color-primary)] focus:bg-white focus:outline-none"
+					class="field"
 				/>
-				<button
-					type="submit"
-					class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-				>
+				<button type="submit" class="w-full rounded-full bg-[var(--color-primary)] px-4 py-3 text-sm font-semibold text-white shadow-md shadow-[var(--color-primary)]/30 hover:opacity-90 transition-opacity">
 					Entrar
 				</button>
-				<p id="login-error" class="hidden text-sm text-red-600"></p>
+				<p id="login-error" class="hidden text-center text-sm text-red-600"></p>
 			</form>
 		</div>
+	</div>
 
-		<div id="admin-dashboard" class="hidden">
-			<div class="flex items-center justify-between">
-				<h1 class="text-2xl font-bold text-[var(--color-secondary)]">Painel</h1>
-				<button id="logout-btn" class="text-sm font-medium text-slate-500 hover:text-[var(--color-primary)]">Sair</button>
+	<div id="admin-dashboard" class="hidden min-h-screen bg-slate-50">
+		<header class="sticky top-0 z-20 border-b border-slate-100 bg-white/90 backdrop-blur-md">
+			<div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3.5 sm:px-6">
+				<div class="flex items-center gap-2.5">
+					<span class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-sm font-bold text-white">
+						{initials}
+					</span>
+					<span class="font-bold text-[var(--color-secondary)]">Painel</span>
+				</div>
+				<div class="flex items-center gap-3">
+					<a href="/" class="text-sm font-medium text-slate-500 hover:text-[var(--color-primary)] transition-colors">Ver site ↗</a>
+					<button id="logout-btn" class="rounded-full border border-slate-200 px-4 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors">
+						Sair
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+			<div class="flex gap-2">
+				<button data-tab="conteudo" class="tab-btn is-active">
+					📝 Conteúdo
+				</button>
+				<button data-tab="leads" class="tab-btn">
+					💬 Leads
+				</button>
 			</div>
 
-			<div class="mt-6 flex gap-2 border-b border-slate-200">
-				<button data-tab="conteudo" class="tab-btn border-b-2 border-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)]">
-					Conteúdo
-				</button>
-				<button data-tab="leads" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-semibold text-slate-500">
-					Leads
-				</button>
-			</div>
+			<section id="tab-conteudo" class="tab-panel mt-6 space-y-6">
+				<p id="save-status" class="hidden rounded-xl px-4 py-3 text-sm font-medium"></p>
 
-			<section id="tab-conteudo" class="tab-panel mt-8 space-y-8">
-				<p id="save-status" class="hidden rounded-lg px-4 py-2.5 text-sm"></p>
-
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Dados pessoais</h2>
-					<div class="mt-3 grid gap-3 sm:grid-cols-2">
-						<input data-field="personal.name" placeholder="Nome" class="field" />
-						<input data-field="personal.role" placeholder="Cargo/atuação" class="field" />
-						<input data-field="personal.tagline" placeholder="Tagline curta" class="field sm:col-span-2" />
-						<textarea data-field="personal.description" placeholder="Descrição" rows="2" class="field sm:col-span-2"></textarea>
-						<input data-field="personal.city" placeholder="Cidade" class="field" />
-						<input data-field="personal.whatsapp" placeholder="WhatsApp (só dígitos, com DDI)" class="field" />
-						<input data-field="personal.instagram" placeholder="Instagram (sem @)" class="field" />
-						<input data-field="personal.email" placeholder="E-mail" class="field" />
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">👤</span> Dados pessoais</h2>
+					<div class="mt-4 grid gap-4 sm:grid-cols-2">
+						<label class="field-group"><span class="label">Nome</span><input data-field="personal.name" class="field" /></label>
+						<label class="field-group"><span class="label">Cargo/atuação</span><input data-field="personal.role" class="field" /></label>
+						<label class="field-group sm:col-span-2"><span class="label">Tagline curta</span><input data-field="personal.tagline" class="field" /></label>
+						<label class="field-group sm:col-span-2"><span class="label">Descrição</span><textarea data-field="personal.description" rows="2" class="field"></textarea></label>
+						<label class="field-group"><span class="label">Cidade</span><input data-field="personal.city" class="field" /></label>
+						<label class="field-group"><span class="label">WhatsApp (só dígitos, com DDI)</span><input data-field="personal.whatsapp" class="field" /></label>
+						<label class="field-group"><span class="label">Instagram (sem @)</span><input data-field="personal.instagram" class="field" /></label>
+						<label class="field-group"><span class="label">E-mail</span><input data-field="personal.email" class="field" /></label>
 					</div>
 				</div>
 
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Cores do tema</h2>
-					<div class="mt-3 grid gap-3 sm:grid-cols-2">
-						<input data-field="theme.primary" placeholder="Cor primária (hex)" class="field" />
-						<input data-field="theme.secondary" placeholder="Cor secundária (hex)" class="field" />
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">🎨</span> Cores do tema</h2>
+					<div class="mt-4 grid gap-4 sm:grid-cols-2">
+						<label class="field-group"><span class="label">Cor primária (hex)</span><input data-field="theme.primary" class="field" /></label>
+						<label class="field-group"><span class="label">Cor secundária (hex)</span><input data-field="theme.secondary" class="field" /></label>
 					</div>
 				</div>
 
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Hero</h2>
-					<div class="mt-3 grid gap-3">
-						<input data-field="hero.badge" placeholder="Badge (ex: Disponível pra novos projetos)" class="field" />
-						<input data-field="hero.headline" placeholder="Título principal" class="field" />
-						<textarea data-field="hero.subheadline" placeholder="Subtítulo" rows="2" class="field"></textarea>
-						<input data-field="hero.ctaText" placeholder="Texto do botão" class="field" />
-						<label class="text-xs font-medium text-slate-500">Estatísticas (JSON — array de {`{value, label}`})</label>
-						<textarea data-field-json="hero.stats" rows="5" class="field font-mono text-xs"></textarea>
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">🚀</span> Hero</h2>
+					<div class="mt-4 grid gap-4">
+						<label class="field-group"><span class="label">Badge</span><input data-field="hero.badge" class="field" /></label>
+						<label class="field-group"><span class="label">Título principal</span><input data-field="hero.headline" class="field" /></label>
+						<label class="field-group"><span class="label">Subtítulo</span><textarea data-field="hero.subheadline" rows="2" class="field"></textarea></label>
+						<label class="field-group"><span class="label">Texto do botão</span><input data-field="hero.ctaText" class="field" /></label>
+						<label class="field-group">
+							<span class="label">Estatísticas — JSON, array de {`{value, label}`}</span>
+							<textarea data-field-json="hero.stats" rows="5" class="field field-code"></textarea>
+						</label>
 					</div>
 				</div>
 
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Sobre</h2>
-					<div class="mt-3 grid gap-3">
-						<input data-field="about.title" placeholder="Título da seção" class="field" />
-						<textarea data-field="about.text" placeholder="Texto" rows="3" class="field"></textarea>
-						<label class="text-xs font-medium text-slate-500">Diferenciais (JSON — array de {`{icon, title, text}`})</label>
-						<textarea data-field-json="about.highlights" rows="6" class="field font-mono text-xs"></textarea>
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">🙋</span> Sobre</h2>
+					<div class="mt-4 grid gap-4">
+						<label class="field-group"><span class="label">Título da seção</span><input data-field="about.title" class="field" /></label>
+						<label class="field-group"><span class="label">Texto</span><textarea data-field="about.text" rows="3" class="field"></textarea></label>
+						<label class="field-group">
+							<span class="label">Fotos — JSON, array de URLs (a 1ª é a foto principal)</span>
+							<textarea id="about-photos-input" data-field-json="about.photos" rows="3" class="field field-code"></textarea>
+						</label>
+						<div id="photos-preview" class="flex flex-wrap gap-3"></div>
+						<label class="field-group">
+							<span class="label">Diferenciais — JSON, array de {`{icon, title, text}`}</span>
+							<textarea data-field-json="about.highlights" rows="6" class="field field-code"></textarea>
+						</label>
 					</div>
 				</div>
 
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Portfólio</h2>
-					<label class="mt-3 block text-xs font-medium text-slate-500">
-						JSON — array de {`{name, niche, description, icon, url?, status?: "encerrado"}`}
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">💼</span> Portfólio</h2>
+					<label class="field-group mt-4">
+						<span class="label">JSON — array de {`{name, niche, description, icon, url?, status?: "encerrado"}`}</span>
+						<textarea data-field-json="portfolio" rows="10" class="field field-code"></textarea>
 					</label>
-					<textarea data-field-json="portfolio" rows="10" class="field font-mono text-xs mt-1"></textarea>
 				</div>
 
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Planos</h2>
-					<label class="mt-3 block text-xs font-medium text-slate-500">
-						JSON — array de {`{name, setupPrice, monthlyPrice, features: string[], highlighted?}`}
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">💳</span> Planos</h2>
+					<label class="field-group mt-4">
+						<span class="label">JSON — array de {`{name, setupPrice, monthlyPrice, features: string[], highlighted?}`}</span>
+						<textarea data-field-json="planos" rows="12" class="field field-code"></textarea>
 					</label>
-					<textarea data-field-json="planos" rows="12" class="field font-mono text-xs mt-1"></textarea>
 				</div>
 
-				<div>
-					<h2 class="text-sm font-bold uppercase tracking-wide text-slate-400">Contato</h2>
-					<div class="mt-3 grid gap-3 sm:grid-cols-2">
-						<input data-field="contact.web3formsKey" placeholder="Chave Web3Forms" class="field" />
-						<label class="flex items-center gap-2 text-sm text-slate-600">
-							<input type="checkbox" data-field-checkbox="contact.showForm" />
+				<div class="card">
+					<h2 class="card-title"><span class="card-icon">📬</span> Contato</h2>
+					<div class="mt-4 grid gap-4 sm:grid-cols-2">
+						<label class="field-group"><span class="label">Chave Web3Forms</span><input data-field="contact.web3formsKey" class="field" /></label>
+						<label class="flex items-center gap-2 self-end pb-2.5 text-sm text-slate-600">
+							<input type="checkbox" data-field-checkbox="contact.showForm" class="h-4 w-4 rounded border-slate-300 text-[var(--color-primary)]" />
 							Mostrar formulário de contato
 						</label>
 					</div>
 				</div>
 
-				<button
-					id="save-btn"
-					class="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-				>
+				<button id="save-btn" class="sticky bottom-6 w-full rounded-full bg-[var(--color-primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-[var(--color-primary)]/30 hover:opacity-90 transition-opacity">
 					Salvar alterações
 				</button>
 			</section>
 
-			<section id="tab-leads" class="tab-panel mt-8 hidden">
-				<div class="overflow-x-auto rounded-2xl border border-slate-100">
-					<table class="w-full text-left text-sm">
-						<thead class="bg-slate-50 text-slate-500">
-							<tr>
-								<th class="px-4 py-3 font-semibold">Nome</th>
-								<th class="px-4 py-3 font-semibold">Telefone</th>
-								<th class="px-4 py-3 font-semibold">Mensagem</th>
-								<th class="px-4 py-3 font-semibold">Data</th>
-								<th class="px-4 py-3 font-semibold"></th>
-							</tr>
-						</thead>
-						<tbody id="leads-tbody" class="divide-y divide-slate-100"></tbody>
-					</table>
+			<section id="tab-leads" class="tab-panel mt-6 hidden">
+				<div id="leads-list" class="space-y-3"></div>
+				<div id="leads-empty" class="hidden rounded-2xl border border-dashed border-slate-200 py-16 text-center">
+					<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-xl">📭</div>
+					<p class="mt-3 text-sm text-slate-400">Nenhum lead ainda.</p>
 				</div>
-				<p id="leads-empty" class="hidden mt-6 text-center text-sm text-slate-400">Nenhum lead ainda.</p>
 			</section>
 		</div>
 	</div>
@@ -167,16 +183,85 @@ import { defaultSiteConfig } from '../../site.config';
 <style>
 	.field {
 		width: 100%;
-		border-radius: 0.5rem;
+		border-radius: 0.625rem;
 		border: 1px solid rgb(226 232 240);
 		background: rgb(248 250 252);
 		padding: 0.625rem 1rem;
 		font-size: 0.875rem;
+		transition: border-color 0.15s, background-color 0.15s;
 	}
 	.field:focus {
 		outline: none;
 		border-color: var(--color-primary);
 		background: white;
+	}
+	.field-code {
+		font-family: ui-monospace, "SF Mono", Menlo, monospace;
+		font-size: 0.75rem;
+		background: rgb(15 23 42);
+		color: rgb(226 232 240);
+		border-color: rgb(15 23 42);
+	}
+	.field-code:focus {
+		background: rgb(15 23 42);
+		border-color: var(--color-primary);
+	}
+	.field-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
+	}
+	.label {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: rgb(100 116 139);
+	}
+	.card {
+		border-radius: 1.25rem;
+		border: 1px solid rgb(241 245 249);
+		background: white;
+		padding: 1.5rem;
+		box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+	}
+	.card-title {
+		display: flex;
+		align-items: center;
+		gap: 0.625rem;
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--color-secondary);
+	}
+	.card-icon {
+		display: flex;
+		height: 2rem;
+		width: 2rem;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.625rem;
+		background: rgb(248 250 252);
+		font-size: 1rem;
+	}
+	.tab-btn {
+		border-radius: 9999px;
+		padding: 0.5rem 1.125rem;
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: rgb(100 116 139);
+		transition: background-color 0.15s, color 0.15s;
+	}
+	.tab-btn:hover {
+		background: rgb(241 245 249);
+	}
+	.tab-btn.is-active {
+		background: var(--color-primary);
+		color: white;
+	}
+	.photo-thumb {
+		height: 5rem;
+		width: 5rem;
+		border-radius: 0.75rem;
+		object-fit: cover;
+		border: 1px solid rgb(226 232 240);
 	}
 </style>
 
@@ -240,12 +325,8 @@ import { defaultSiteConfig } from '../../site.config';
 		// --- Tabs ---
 		document.querySelectorAll<HTMLButtonElement>('.tab-btn').forEach((btn) => {
 			btn.addEventListener('click', () => {
-				document.querySelectorAll('.tab-btn').forEach((b) => {
-					b.classList.remove('border-[var(--color-primary)]', 'text-[var(--color-primary)]');
-					b.classList.add('border-transparent', 'text-slate-500');
-				});
-				btn.classList.add('border-[var(--color-primary)]', 'text-[var(--color-primary)]');
-				btn.classList.remove('border-transparent', 'text-slate-500');
+				document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('is-active'));
+				btn.classList.add('is-active');
 
 				document.querySelectorAll('.tab-panel').forEach((p) => p.classList.add('hidden'));
 				$(`#tab-${btn.dataset.tab}`).classList.remove('hidden');
@@ -263,6 +344,21 @@ import { defaultSiteConfig } from '../../site.config';
 			target[last] = value;
 		}
 
+		function renderPhotoPreviews() {
+			const textarea = document.getElementById('about-photos-input') as HTMLTextAreaElement;
+			const previewEl = $('#photos-preview');
+			if (!textarea || !previewEl) return;
+			try {
+				const urls: string[] = JSON.parse(textarea.value);
+				previewEl.innerHTML = urls
+					.filter((u) => typeof u === 'string' && u)
+					.map((u) => `<img src="${u}" class="photo-thumb" loading="lazy" />`)
+					.join('');
+			} catch {
+				// deixa a última prévia válida na tela enquanto o JSON está incompleto
+			}
+		}
+
 		async function loadContent() {
 			const { data, error } = await supabase.from('site_content').select('data').eq('id', 'main').maybeSingle();
 			currentContent = !error && data?.data ? (data.data as SiteConfig) : structuredClone(defaultSiteConfig);
@@ -276,6 +372,9 @@ import { defaultSiteConfig } from '../../site.config';
 			document.querySelectorAll<HTMLInputElement>('[data-field-checkbox]').forEach((el) => {
 				el.checked = Boolean(getByPath(currentContent, el.dataset.fieldCheckbox!));
 			});
+
+			renderPhotoPreviews();
+			document.getElementById('about-photos-input')?.addEventListener('input', renderPhotoPreviews);
 		}
 
 		$('#save-btn').addEventListener('click', async () => {
@@ -294,7 +393,8 @@ import { defaultSiteConfig } from '../../site.config';
 				});
 			} catch {
 				statusEl.textContent = 'Algum campo JSON está com formato inválido — confira colchetes/vírgulas.';
-				statusEl.className = 'rounded-lg px-4 py-2.5 text-sm bg-red-50 text-red-700';
+				statusEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-red-50 text-red-700';
+				statusEl.classList.remove('hidden');
 				return;
 			}
 
@@ -304,24 +404,32 @@ import { defaultSiteConfig } from '../../site.config';
 
 			if (error) {
 				statusEl.textContent = `Erro ao salvar: ${error.message}`;
-				statusEl.className = 'rounded-lg px-4 py-2.5 text-sm bg-red-50 text-red-700';
+				statusEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-red-50 text-red-700';
 			} else {
 				currentContent = updated;
 				statusEl.textContent = 'Salvo! O site já reflete as mudanças.';
-				statusEl.className = 'rounded-lg px-4 py-2.5 text-sm bg-emerald-50 text-emerald-700';
+				statusEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-emerald-50 text-emerald-700';
 			}
+			statusEl.classList.remove('hidden');
 		});
 
 		// --- Leads ---
+		function initialsOf(name: string) {
+			const parts = name.trim().split(/\s+/).filter(Boolean);
+			if (parts.length === 0) return '?';
+			if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+			return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+		}
+
 		async function loadLeads() {
-			const tbody = $('#leads-tbody');
+			const listEl = $('#leads-list');
 			const emptyEl = $('#leads-empty');
 			const { data, error } = await supabase
 				.from('leads')
 				.select('*')
 				.order('created_at', { ascending: false });
 
-			tbody.innerHTML = '';
+			listEl.innerHTML = '';
 			if (error || !data || data.length === 0) {
 				emptyEl.classList.remove('hidden');
 				return;
@@ -329,21 +437,30 @@ import { defaultSiteConfig } from '../../site.config';
 			emptyEl.classList.add('hidden');
 
 			for (const lead of data) {
-				const tr = document.createElement('tr');
-				const date = new Date(lead.created_at).toLocaleString('pt-BR');
-				tr.innerHTML = `
-					<td class="px-4 py-3 font-medium">${escapeHtml(lead.name)}</td>
-					<td class="px-4 py-3">${escapeHtml(lead.phone)}</td>
-					<td class="px-4 py-3 max-w-xs truncate" title="${escapeHtml(lead.message)}">${escapeHtml(lead.message)}</td>
-					<td class="px-4 py-3 text-slate-500">${date}</td>
-					<td class="px-4 py-3 text-right">
-						<button data-delete-lead="${lead.id}" class="text-red-500 hover:underline">Excluir</button>
-					</td>
+				const date = new Date(lead.created_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+				const waDigits = String(lead.phone).replace(/\D/g, '');
+				const card = document.createElement('div');
+				card.className = 'flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm';
+				card.innerHTML = `
+					<div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)]/10 text-sm font-bold text-[var(--color-primary)]">
+						${escapeHtml(initialsOf(lead.name))}
+					</div>
+					<div class="min-w-0 flex-1">
+						<div class="flex items-center justify-between gap-2">
+							<p class="font-semibold text-[var(--color-secondary)]">${escapeHtml(lead.name)}</p>
+							<span class="shrink-0 text-xs text-slate-400">${date}</span>
+						</div>
+						<p class="mt-1 text-sm text-slate-600">${escapeHtml(lead.message)}</p>
+						<div class="mt-2.5 flex items-center gap-4 text-xs">
+							<a href="https://wa.me/${waDigits}" target="_blank" rel="noopener noreferrer" class="font-semibold text-emerald-600 hover:underline">💬 ${escapeHtml(lead.phone)}</a>
+							<button data-delete-lead="${lead.id}" class="font-semibold text-red-500 hover:underline">Excluir</button>
+						</div>
+					</div>
 				`;
-				tbody.appendChild(tr);
+				listEl.appendChild(card);
 			}
 
-			tbody.querySelectorAll<HTMLButtonElement>('[data-delete-lead]').forEach((btn) => {
+			listEl.querySelectorAll<HTMLButtonElement>('[data-delete-lead]').forEach((btn) => {
 				btn.addEventListener('click', async () => {
 					await supabase.from('leads').delete().eq('id', btn.dataset.deleteLead);
 					loadLeads();
