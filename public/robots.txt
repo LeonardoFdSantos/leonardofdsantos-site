@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://leonardofdsantos.com.br/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 2
+
+# Host
+Host: https://leonardofdsantos.com.br
+
+# Googlebot specific
+User-agent: Googlebot
+Disallow: /admin
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.webp$
+
+# Bingbot
+User-agent: Bingbot
+Disallow: /admin
+Allow: /
+
+# SEO Optimization
+User-agent: *
+Disallow: /admin
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.xls$
+
+# Sitemap location
+Sitemap: https://leonardofdsantos.com.br/sitemap.xml

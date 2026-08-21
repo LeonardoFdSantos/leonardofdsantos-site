@@ -18,14 +18,14 @@ const [mainPhoto, secondaryPhoto] = about.photos ?? [];
 				<div class="relative overflow-hidden rounded-[2rem] shadow-2xl shadow-slate-900/10">
 					<img
 						src={mainPhoto}
-						alt="Foto de perfil"
+						alt={`Leonardo Felipe da Silva dos Santos - ${about.title}`}
 						class="aspect-[4/5] w-full object-cover"
 						loading="lazy"
 					/>
 				</div>
 				{secondaryPhoto && (
 					<div class="absolute -bottom-8 -right-8 hidden h-32 w-32 overflow-hidden rounded-2xl border-4 border-white shadow-xl sm:block">
-						<img src={secondaryPhoto} alt="" class="h-full w-full object-cover" loading="lazy" />
+						<img src={secondaryPhoto} alt="Leonardo Felipe trabalhando em projeto de site" class="h-full w-full object-cover" loading="lazy" />
 					</div>
 				)}
 			</div>

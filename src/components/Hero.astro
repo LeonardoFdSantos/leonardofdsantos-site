@@ -10,7 +10,7 @@ const { personal, hero } = Astro.props.siteConfig;
 const waLink = `https://wa.me/${personal.whatsapp}`;
 ---
 
-<section id="topo" class="relative overflow-hidden bg-white">
+<section id="topo" class="relative overflow-hidden bg-white" itemscope itemtype="https://schema.org/Person">
 	<div class="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[var(--color-primary)]/15 blur-3xl"></div>
 	<div class="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-[var(--color-secondary)]/10 blur-3xl"></div>
 
@@ -22,10 +22,12 @@ const waLink = `https://wa.me/${personal.whatsapp}`;
 					{hero.badge}
 				</span>
 
-				<h1 class="mt-6 text-4xl sm:text-5xl font-extrabold tracking-tight text-[var(--color-secondary)] leading-[1.1]">
-					{hero.headline}
+				<h1 class="mt-6 text-4xl sm:text-5xl font-extrabold tracking-tight text-[var(--color-secondary)] leading-[1.1]" itemprop="name">
+					{personal.name} - {personal.role}
 				</h1>
-				<p class="mx-auto lg:mx-0 mt-5 max-w-xl text-lg text-slate-600">
+				<meta itemprop="jobTitle" content={personal.role} />
+				<meta itemprop="description" content={personal.description} />
+				<p class="mx-auto lg:mx-0 mt-5 max-w-xl text-lg text-slate-600" itemprop="description">
 					{hero.subheadline}
 				</p>
 
@@ -62,8 +64,9 @@ const waLink = `https://wa.me/${personal.whatsapp}`;
 					{personal.photo ? (
 						<img
 							src={personal.photo}
-							alt={personal.name}
+							alt={`Foto de ${personal.name}, ${personal.role} em ${personal.city}`}
 							class="h-72 w-72 rounded-[2.5rem] object-cover shadow-2xl shadow-[var(--color-primary)]/30"
+							itemprop="image"
 						/>
 					) : (
 						<Logo class="h-72 w-72 rounded-[2.5rem] shadow-2xl shadow-[var(--color-primary)]/30" id="logo-hero" />

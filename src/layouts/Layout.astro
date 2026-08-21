@@ -17,6 +17,134 @@ const SITE_URL = "https://leonardofdsantos.com.br";
 const FALLBACK_OG_IMAGE = "https://images.unsplash.com/photo-1638482856830-16b0e15fcf2c?w=1200&h=630&fit=crop&q=80";
 const ogImage = seo?.ogImage ?? FALLBACK_OG_IMAGE;
 const canonicalUrl = `${SITE_URL}${Astro.url.pathname}`;
+
+// SEO Keywords - palavras-chave para busca no Google
+const keywords = seo?.keywords || [
+  "Leonardo Felipe",
+  "Leonardo Felipe da Silva dos Santos",
+  "Leonardo Santos",
+  "criação de sites Santa Maria",
+  "desenvolvedor web Santa Maria",
+  "sites institucionais Santa Maria",
+  "desenvolvimento web RS",
+  "criação de sites profissionais",
+  "sites para pequenos negócios",
+  "desenvolvedor freelancer Santa Maria",
+  "freelancer criação de sites",
+  "sites rápidos e baratos",
+  "site institucional empresa local"
+].join(", ");
+
+// Schema.org JSON-LD - dados estruturados para SEO
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}#person`,
+      "name": personal.name,
+      "alternateName": ["Leonardo Felipe", "Leonardo Santos", "Leonardo Felipe da Silva dos Santos"],
+      "description": personal.description,
+      "jobTitle": personal.role,
+      "url": SITE_URL,
+      "sameAs": [
+        personal.instagram ? `https://instagram.com/${personal.instagram}` : null,
+        `https://wa.me/${personal.whatsapp}`
+      ].filter(Boolean),
+      "image": personal.photo || "/leonardo.jpg",
+      "email": personal.email,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": personal.city,
+        "addressRegion": "RS",
+        "addressCountry": "BR"
+      },
+      "knowsAbout": [
+        "Web Development",
+        "Web Design",
+        "Astro",
+        "Tailwind CSS",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}#service`,
+      "name": personal.name,
+      "description": personal.description,
+      "serviceType": "Web Design",
+      "provider": {
+        "@id": `${SITE_URL}#person`
+      },
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "Santa Maria, RS"
+        },
+        {
+          "@type": "Place",
+          "name": "Rio Grande do Sul"
+        },
+        {
+          "@type": "Country",
+          "name": "Brasil"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Planos de Criação de Sites",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Plano Essencial",
+            "price": "500",
+            "priceCurrency": "BRL",
+            "description": "Site institucional de 1 página com hospedagem e domínio"
+          },
+          {
+            "@type": "Offer",
+            "name": "Plano Completo",
+            "price": "800",
+            "priceCurrency": "BRL",
+            "description": "Site com múltiplas seções e ajustes mensais"
+          },
+          {
+            "@type": "Offer",
+            "name": "Plano Premium",
+            "price": "2000",
+            "priceCurrency": "BRL",
+            "description": "Painel/CRM próprio com Next.js e Supabase"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      "url": SITE_URL,
+      "name": personal.name,
+      "description": personal.description,
+      "publisher": {
+        "@id": `${SITE_URL}#person`
+      },
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": SITE_URL
+        }
+      ]
+    }
+  ]
+};
 ---
 
 <!doctype html>
@@ -32,10 +160,18 @@ const canonicalUrl = `${SITE_URL}${Astro.url.pathname}`;
 			rel="stylesheet"
 		/>
 		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content={personal.name} />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+		<meta name="googlebot" content="index, follow" />
+		<meta name="theme-color" content={theme.primary} />
+		<meta name="geo.region" content="BR-RS" />
+		<meta name="geo.placename" content={personal.city} />
 		{Astro.props.noindex && <meta name="robots" content="noindex, nofollow" />}
 		<link rel="canonical" href={canonicalUrl} />
 
+		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={personal.name} />
 		<meta property="og:title" content={title} />
@@ -44,12 +180,21 @@ const canonicalUrl = `${SITE_URL}${Astro.url.pathname}`;
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={`${personal.name} - ${personal.role}`} />
 		<meta property="og:locale" content="pt_BR" />
+		<meta property="og:locale:alternate" content="pt_BR" />
+		<meta property="profile:first_name" content="Leonardo" />
+		<meta property="profile:last_name" content="Santos" />
 
+		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={`${personal.name} - ${personal.role}`} />
+
+		<!-- Schema.org JSON-LD -->
+		<script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
 
 		<title>{title}</title>
 	</head>
