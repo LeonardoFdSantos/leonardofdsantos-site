@@ -221,6 +221,30 @@ export const defaultSiteConfig: SiteConfig = {
       date: "02 de Novembro, 2025",
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=500&fit=crop&q=80",
       content: "Uma das dúvidas mais comuns dos empreendedores é sobre o investimento necessário para colocar uma empresa na internet. Oferecemos opções acessíveis com planos a partir de R$ 500 de setup inicial + taxa mensal de manutenção que já inclui hospedagem e domínio."
+    },
+    {
+      slug: "importancia-do-seo-local-para-comercios",
+      title: "A Importância do SEO Local para Comércios e Prestadores de Serviços",
+      description: "Como aparecer nas primeiras posições do Google para clientes na sua região em Santa Maria.",
+      date: "10 de Novembro, 2025",
+      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&h=500&fit=crop&q=80",
+      content: "O SEO local é a estratégia definitiva para atrair clientes que estão procurando exatamente o seu serviço no seu bairro ou cidade. Combinando meta tags otimizadas, dados estruturados (Schema.org) e um site rápido, seu negócio ganha destaque imediato nas buscas orgânicas."
+    },
+    {
+      slug: "por-que-evitar-wordpress-em-sites-institucionais",
+      title: "Por Que Evitar WordPress em Sites Institucionais de Pequenos Negócios?",
+      description: "Entenda por que código moderno e estático supera plataformas pesadas em segurança, velocidade e custo.",
+      date: "17 de Novembro, 2025",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
+      content: "Muitas agências ainda empurram WordPress para qualquer tipo de site. No entanto, para sites institucionais de pequenos negócios, plataformas cheias de plugins geram lentidão, brechas de segurança e custos desnecessários de manutenção. Com sites estáticos desenvolvidos em Astro, garantimos performance máxima."
+    },
+    {
+      slug: "como-atrair-mais-clientes-pelo-whatsapp-atraves-do-site",
+      title: "Como Atrair Mais Clientes pelo WhatsApp Através do Seu Site",
+      description: "Dicas práticas de conversão para transformar visitantes do seu site em conversas diretas no WhatsApp.",
+      date: "24 de Novembro, 2025",
+      image: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&h=500&fit=crop&q=80",
+      content: "Ter tráfego no site não adianta nada se o cliente não entrar em contato. O segredo está em colocar botões de chamada para ação (CTA) estratégicos e flutuantes conectados diretamente ao seu WhatsApp."
     }
   ],
   seo: {
