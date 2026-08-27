@@ -7,11 +7,21 @@ interface Props {
 
 const { siteConfig } = Astro.props;
 
+const meses: Record<string, string> = {
+  "Janeiro": "01", "Fevereiro": "02", "Março": "03", "Abril": "04",
+  "Maio": "05", "Junho": "06", "Julho": "07", "Agosto": "08",
+  "Setembro": "09", "Outubro": "10", "Novembro": "11", "Dezembro": "12"
+};
+
+const parseDate = (dateStr: string) => {
+  const [dia, resto] = dateStr.split(' de ');
+  const [mes, ano] = resto.split(', ');
+  return new Date(`${ano}-${meses[mes]}-${dia.padStart(2, '0')}`);
+};
+
 // Ordena os posts do mais novo para o mais velho
 const sortedPosts = [...siteConfig.blogPosts].sort((a, b) => {
-  const dateA = new Date(a.date.split(' de ').reverse().join('-'));
-  const dateB = new Date(b.date.split(' de ').reverse().join('-'));
-  return dateB - dateA;
+  return parseDate(b.date).getTime() - parseDate(a.date).getTime();
 });
 
 const recentPosts = sortedPosts.slice(0, 3);
