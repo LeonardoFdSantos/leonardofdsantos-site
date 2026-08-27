@@ -1,32 +1,81 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { defaultSiteConfig } from '../../../site.config';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { defaultSiteConfig } from '../../site.config';
 
-// Obtém todos os posts do blog
-const posts = await getCollection('blog');
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'criacao-sites-santa-maria' },
+      props: {
+        title: 'Criação de Sites em Santa Maria: Tudo o que Você Precisa Saber',
+        date: '15 de Outubro, 2023',
+        description: 'Descubra como criar um site profissional em Santa Maria e impulsione seu negócio local com presença online.',
+        content: `
+          <p>Se você está procurando por <strong>criação de sites em Santa Maria</strong>, chegou ao lugar certo. Ter um site profissional é essencial para qualquer negócio local que deseja crescer e atrair mais clientes. Neste artigo, vamos explorar tudo o que você precisa saber sobre a criação de sites em Santa Maria.</p>
 
-// Pega o primeiro slug da URL (ex: /blog/criacao-sites-santa-maria)
-const slug = Astro.params.slug[0];
+          <h2>Por que Ter um Site é Importante para Seu Negócio em Santa Maria</h2>
+          <p>Ter um site profissional oferece inúmeras vantagens para o seu negócio em Santa Maria:</p>
+          <ul>
+            <li><strong>Visibilidade</strong>: Um site bem otimizado aparece nos resultados de busca do Google, atraindo mais clientes.</li>
+            <li><strong>Credibilidade</strong>: Um site profissional passa confiança e credibilidade para os seus clientes.</li>
+            <li><strong>Acessibilidade</strong>: Seus clientes podem acessar informações sobre o seu negócio a qualquer hora, de qualquer lugar.</li>
+          </ul>
 
-// Encontra o post correspondente ao slug
-const post = posts.find((p: CollectionEntry<'blog'>) => p.slug === slug);
+          <h2>Como Criar um Site em Santa Maria</h2>
+          <p>Criar um site em Santa Maria é um processo simples e rápido. Aqui estão os passos básicos:</p>
+          <ol>
+            <li><strong>Defina o Objetivo do Site</strong>: Determine o que você quer alcançar com o seu site.</li>
+            <li><strong>Escolha um Domínio</strong>: Selecione um nome de domínio que seja fácil de lembrar e relevante para o seu negócio.</li>
+            <li><strong>Desenvolvimento</strong>: Crie o design e a estrutura do site.</li>
+            <li><strong>Conteúdo</strong>: Adicione conteúdo relevante e otimizado para SEO.</li>
+            <li><strong>Lançamento</strong>: Publique o site e comece a atrair visitantes.</li>
+          </ol>
 
-if (!post) {
-  throw new Error('Post não encontrado');
+          <h2>Conclusão</h2>
+          <p>Ter um site profissional é essencial para qualquer negócio em Santa Maria que deseja crescer e atrair mais clientes. Se você está procurando por criação de sites em Santa Maria, não hesite em entrar em contato para obter um site profissional e bem otimizado para o seu negócio.</p>
+        `
+      }
+    },
+    {
+      params: { slug: 'desenvolvimento-web-rapido' },
+      props: {
+        title: 'Desenvolvimento Web Rápido: Como Ter Seu Site em Poucos Dias',
+        date: '20 de Outubro, 2023',
+        description: 'Aprenda como o desenvolvimento web rápido pode ajudar seu negócio a marcar presença online em poucos dias.',
+        content: `
+          <p>No mundo digital de hoje, a velocidade é fundamental. Se você está procurando por <strong>desenvolvimento web rápido</strong>, este artigo é para você. Vamos explicar como ter seu site pronto em poucos dias, sem perder qualidade.</p>
+
+          <h2>O Que é Desenvolvimento Web Rápido?</h2>
+          <p>O desenvolvimento web rápido é uma abordagem que prioriza a agilidade na criação de sites, utilizando tecnologias modernas e frameworks eficientes como Astro e Tailwind CSS. Isso permite entregar sites institucionais de alta qualidade em tempo recorde.</p>
+
+          <h2>Vantagens de um Site Rápido</h2>
+          <p>Ter um site rápido traz inúmeros benefícios:</p>
+          <ul>
+            <li><strong>Experiência do Usuário</strong>: Visitantes odeiam sites lentos. Sites rápidos mantêm os usuários engajados.</li>
+            <li><strong>SEO (Google)</strong>: O Google prioriza sites que carregam rapidamente nos resultados de busca.</li>
+            <li><strong>Conversão</strong>: Sites rápidos convertem mais visitantes em clientes.</li>
+          </ul>
+
+          <h2>Como Conseguir um Site Rápido em Santa Maria</h2>
+          <p>Se você é de Santa Maria e precisa de um site rápido, a solução é contratar um desenvolvedor especializado que utilize ferramentas modernas (sem WordPress pesado e cheio de plugins lentos).</p>
+          <p>Entre em contato para saber como podemos ter seu site no ar em até 48 horas!</p>
+        `
+      }
+    }
+  ];
 }
+
+const { title, date, description, content } = Astro.props;
 ---
 
-<Layout siteConfig={defaultSiteConfig} title={`${post.data.title} — Blog Leonardo Santos`} description={post.data.description}>
-  <main class="py-20 px-4 sm:px-6 max-w-4xl mx-auto">
-    <div class="mb-12">
+<Layout siteConfig={defaultSiteConfig} title={`${title} — Blog Leonardo Santos`} description={description}>
+  <main class="py-20 px-4 sm:px-6 max-w-3xl mx-auto">
+    <div class="mb-8">
       <a href="/blog" class="text-sm font-semibold text-[var(--color-primary)] hover:underline">&larr; Voltar para o Blog</a>
-      <h1 class="mt-4 text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight">{post.data.title}</h1>
-      <time class="mt-2 text-sm text-slate-500">{post.data.date}</time>
+      <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight">{title}</h1>
+      <time class="mt-2 block text-sm text-slate-500">{date}</time>
     </div>
 
-    <article class="prose max-w-none">
-      <AstroContent />
-    </article>
+    <article class="prose prose-slate lg:prose-lg max-w-none space-y-6 text-slate-700 leading-relaxed" set:html={content} />
   </main>
 </Layout>
