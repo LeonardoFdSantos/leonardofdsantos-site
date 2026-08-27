@@ -1,8 +1,4 @@
-// ============================================================================
-// site.config.ts — dados do portfólio pessoal (leonardofdsantos.com.br).
-// Mesmo padrão usado em site-template/src/site.config.ts — edite aqui pra
-// atualizar textos, projetos do portfólio e planos.
-// ============================================================================
+import { type SiteConfig } from "./site.config"; // ajuste interno se necessário
 
 export type BlogPost = {
   slug: string;
@@ -17,16 +13,10 @@ export type PortfolioItem = {
   name: string;
   niche: string;
   description: string;
-  icon: string; // emoji representando o nicho
-  image?: string; // foto de capa do card (URL pública)
-  url?: string; // link da demo/site publicado (deixe vazio até publicar)
-  status?: "encerrado"; // marque projetos que não estão mais no ar
-};
-
-export type Highlight = {
   icon: string;
-  title: string;
-  text: string;
+  image?: string;
+  url?: string;
+  status?: "encerrado";
 };
 
 export type PlanoItem = {
@@ -37,53 +27,12 @@ export type PlanoItem = {
   highlighted?: boolean;
 };
 
-export interface SiteConfig {
-  personal: {
-    name: string;
-    role: string;
-    tagline: string;
-    description: string;
-    city: string;
-    whatsapp: string; // dígitos com DDI
-    instagram?: string;
-    email?: string;
-    photo?: string; // foto de perfil (URL) — mostrada no hero. Sem ela, cai pra logo.
-  };
-  theme: {
-    primary: string;
-    secondary: string;
-  };
-  hero: {
-    badge: string;
-    headline: string;
-    subheadline: string;
-    ctaText: string;
-    stats: { value: string; label: string }[];
-  };
-  about: {
-    title: string;
-    text: string;
-    highlights: Highlight[];
-    photos: string[]; // URLs de imagem — troque pelas suas fotos quando tiver
-  };
-  portfolio: PortfolioItem[];
-  planos: PlanoItem[];
-  contact: {
-    web3formsKey: string;
-    showForm: boolean;
-  };
-  blogPosts: BlogPost[];
-  seo: {
-    ogImage: string; // imagem de preview ao compartilhar o link (1200x630 recomendado)
-    keywords?: string; // palavras-chave personalizadas (opcional)
-    authorBio?: string; // bio do autor para SEO (opcional)
-  };
-}
+export type Highlight = {
+  icon: string;
+  title: string;
+  text: string;
+};
 
-// Conteúdo padrão / de fallback — usado no primeiro build e sempre que o
-// Supabase não estiver configurado ou a busca falhar (ver src/lib/content.ts).
-// Depois que o admin (/admin) salvar uma edição, o site passa a servir o
-// conteúdo do banco em vez deste aqui.
 export const defaultSiteConfig: SiteConfig = {
   personal: {
     name: "Leonardo Felipe da Silva dos Santos",
@@ -102,29 +51,26 @@ export const defaultSiteConfig: SiteConfig = {
     secondary: "#0f172a",
   },
   hero: {
-    badge: "Disponível pra novos projetos",
-    headline: "Seu negócio merece um site tão bom quanto o seu atendimento",
+    badge: "Disponível para novos projetos em Santa Maria - RS",
+    headline: "Sua empresa no Google em dias, com preço que cabe no bolso.",
     subheadline:
-      "Sites institucionais rápidos, com preço acessível e prontos em poucos dias — pra você aparecer no Google e passar confiança pros seus clientes.",
-    ctaText: "Falar no WhatsApp",
+      "Crio sites institucionais rápidos e profissionais para pequenos negócios. Sem complicação, sem WordPress lento e com suporte mensal dedicado.",
+    ctaText: "Quero meu site agora",
     stats: [
-      { value: "4+", label: "sites entregues" },
-      { value: "48h", label: "primeira demo pronta" },
-      { value: "R$500", label: "a partir de" },
+      { value: "+12", label: "Projetos entregues" },
+      { value: "48h", label: "Primeira demo no ar" },
+      { value: "100%", label: "Foco em conversão" },
     ],
   },
   about: {
-    title: "Sobre mim",
-    text: "Crio sites institucionais pra pequenos negócios locais que ainda não têm site próprio ou dependem só de indicação. Cada site é feito sob medida, rápido de produzir e com uma mensalidade acessível de manutenção — sem enrolação, sem WordPress.",
-    // Fotos reais e gratuitas (Unsplash) de ambiente de código — sem rosto
-    // de propósito, pra não sugerir ser uma foto sua até você trocar pelas
-    // suas de verdade pelo /admin (aceita qualquer URL de imagem pública).
+    title: "Desenvolvimento web moderno e sem burocracia para sua empresa",
+    text: "Sou desenvolvedor web focado em ajudar comércios locais, oficinas, salões e profissionais liberais de Santa Maria e região a marcarem presença na internet com alta performance e investimento justo.",
     photos: [
-      "https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?w=800&h=1000&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?w=400&h=400&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=1000&fit=crop&q=80",
     ],
     highlights: [
-      { icon: "⚡", title: "Rápido", text: "Site pronto em poucos dias, não meses." },
+      { icon: "⚡", title: "Entrega ultrarrápida", text: "Site pronto em poucos dias, não meses." },
       { icon: "💸", title: "Preço acessível", text: "Setup baixo pensado pra quem tá começando." },
       { icon: "🚫", title: "Sem WordPress", text: "Código leve, rápido de carregar, sem plugin quebrado." },
       { icon: "🤝", title: "Suporte contínuo", text: "Mensalidade cobre ajustes e manutenção." },
@@ -216,11 +162,11 @@ export const defaultSiteConfig: SiteConfig = {
     },
     {
       slug: "quanto-custa-criar-um-site-em-santa-maria-2025",
-      title: "Quanto Custa Criar um Site em Santa Maria?",
+      title: "Quanto Custa Criar um Site em Santa Maria em 2025?",
       description: "Análise completa dos custos para desenvolver um site institucional ou landing page para sua empresa em Santa Maria - RS.",
       date: "02 de Novembro, 2025",
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=500&fit=crop&q=80",
-      content: "Uma das dúvidas mais comuns dos empreendedores é sobre o investimento necessário para colocar uma empresa na internet. Oferecemos opções acessíveis com planos a partir de R$ 500 de setup inicial + taxa mensal de manutenção que já inclui hospedagem e domínio."
+      content: "Uma das dúvidas mais comuns dos empreendedores é sobre o investimento necessário para colocar uma empresa na internet. Em 2025, o mercado de criação de sites em Santa Maria oferece opções acessíveis para pequenos negócios.<br><br>Modelos de Investimento:<br>Trabalhamos com planos a partir de R$ 500 de setup inicial + taxa mensal de manutenção que já inclui hospedagem e domínio. Ideal para quem quer começar sem comprometer o caixa."
     },
     {
       slug: "importancia-do-seo-local-para-comercios",
@@ -236,7 +182,7 @@ export const defaultSiteConfig: SiteConfig = {
       description: "Entenda por que código moderno e estático supera plataformas pesadas em segurança, velocidade e custo.",
       date: "17 de Novembro, 2025",
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
-      content: "Muitas agências ainda empurram WordPress para qualquer tipo de site. No entanto, para sites institucionais de pequenos negócios, plataformas cheias de plugins geram lentidão, brechas de segurança e custos desnecessários de manutenção. Com sites estáticos desenvolvidos em Astro, garantimos performance máxima."
+      content: "Muitas agências ainda empurram WordPress para qualquer tipo de site. No entanto, para sites institucionais de pequenos negócios, plataformas cheias de plugins geram lentidão, brechas de segurança e custos desnecessários de manutenção. Com sites estáticos desenvolvidos em Astro, garantimos performance máxima e zero dor de cabeça com invasões."
     },
     {
       slug: "como-atrair-mais-clientes-pelo-whatsapp-atraves-do-site",
@@ -245,15 +191,57 @@ export const defaultSiteConfig: SiteConfig = {
       date: "24 de Novembro, 2025",
       image: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&h=500&fit=crop&q=80",
       content: "Ter tráfego no site não adianta nada se o cliente não entrar em contato. O segredo está em colocar botões de chamada para ação (CTA) estratégicos e flutuantes conectados diretamente ao seu WhatsApp."
+    },
+    {
+      slug: "estudo-caso-oficina-mecanica-santa-maria",
+      title: "Como uma Oficina Mecânica em Santa Maria Dobrou o Faturamento com um Site",
+      description: "Estudo de caso prático mostrando como clientes buscam serviços automotivos no Google.",
+      date: "01 de Dezembro, 2025",
+      image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=800&h=500&fit=crop&q=80",
+      content: "Veja como a presença digital direcionada para buscas locais transformou a captação de clientes de uma oficina mecânica em Santa Maria."
+    },
+    {
+      slug: "saloes-beleza-barbearias-site-vs-instagram",
+      title: "Salões de Beleza e Barbearias: Por Que o Instagram Não Substitui um Site",
+      description: "Entenda por que depender apenas de redes sociais limita o crescimento do seu negócio de beleza.",
+      date: "08 de Dezembro, 2025",
+      image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&h=500&fit=crop&q=80",
+      content: "Redes sociais são ótimas para engajamento, mas o Google é onde as pessoas buscam serviços imediatos na sua região."
+    },
+    {
+      slug: "seo-local-bairros-santa-maria",
+      title: "O Guia do SEO Local para Comércios no Itararé, Centro e Camobi",
+      description: "Como aparecer no Google Maps e nas buscas específicas por bairros estratégicos de Santa Maria.",
+      date: "15 de Dezembro, 2025",
+      image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=800&h=500&fit=crop&q=80",
+      content: "Estratégias avançadas de otimização para dominar os bairros de Santa Maria nas buscas orgânicas."
+    },
+    {
+      slug: "sites-institucionais-rapidos-sem-lentidao",
+      title: "Sites Institucionais Rápidos: O Fim dos Carregamentos Lentos",
+      description: "A importância da velocidade de carregamento e o impacto nos celulares dos clientes.",
+      date: "22 de Dezembro, 2025",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=500&fit=crop&q=80",
+      content: "Descubra por que segundos a mais no carregamento fazem o cliente desistir do seu negócio."
+    },
+    {
+      slug: "marketing-digital-clinicas-psicologos-santa-maria",
+      title: "Como Profissionais de Saúde Devem Divulgar Seus Serviços na Internet",
+      description: "Ética profissional, credibilidade e facilidade de agendamento via WhatsApp.",
+      date: "29 de Dezembro, 2025",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop&q=80",
+      content: "Guia de presença digital para psicólogos, dentistas e clínicas em Santa Maria."
+    },
+    {
+      slug: "erros-comuns-criacao-sites-pequenas-empresas",
+      title: "5 Erros Comuns que Pequenas Empresas Cometem ao Criar Seu Primeiro Site",
+      description: "Evite falhas críticas que prejudicam a imagem e as vendas do seu negócio.",
+      date: "05 de Janeiro, 2026",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop&q=80",
+      content: "Saiba quais são os erros mais comuns e como um site profissional resolve todos eles."
     }
   ],
   seo: {
-    // Foto real (Unsplash), recortada em 1200x630 — aparece quando o link
-    // é compartilhado no WhatsApp, Instagram, etc.
     ogImage: "https://images.unsplash.com/photo-1638482856830-16b0e15fcf2c?w=1200&h=630&fit=crop&q=80",
-    // Palavras-chave SEO otimizadas para encontrar este site no Google
-    keywords: "Leonardo Felipe, Leonardo Felipe da Silva dos Santos, Leonardo Santos, criação de sites Santa Maria, desenvolvedor web Santa Maria, sites institucionais Santa Maria, desenvolvimento web RS, freelancer Santa Maria, sites rápidos, sites acessíveis, sites para pequenos negócios, sites para empresas locais, desenvolvimento web acessível, sites institucionais rápidos, criação de sites profissionais, sites para negócios locais, desenvolvedor web freelancer Santa Maria, sites institucionais acessíveis, criação de sites para empresas, sites para pequenos negócios Santa Maria, desenvolvimento web rápido, sites institucionais para empresas, criação de sites acessíveis Santa Maria",
-    // Bio do autor para SEO
-    authorBio: "Leonardo Felipe da Silva dos Santos é desenvolvedor web especializado em criação de sites institucionais rápidos e acessíveis para pequenos negócios em Santa Maria - RS."
   },
 };
