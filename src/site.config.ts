@@ -192,7 +192,7 @@ export const defaultSiteConfig: SiteConfig = {
     // é compartilhado no WhatsApp, Instagram, etc.
     ogImage: "https://images.unsplash.com/photo-1638482856830-16b0e15fcf2c?w=1200&h=630&fit=crop&q=80",
     // Palavras-chave SEO otimizadas para encontrar este site no Google
-    keywords: "Leonardo Felipe, Leonardo Felipe da Silva dos Santos, Leonardo Santos, criação de sites Santa Maria, desenvolvedor web Santa Maria, sites institucionais, desenvolvimento web RS, freelancer Santa Maria",
+    keywords: "Leonardo Felipe, Leonardo Felipe da Silva dos Santos, Leonardo Santos, criação de sites Santa Maria, desenvolvedor web Santa Maria, sites institucionais Santa Maria, desenvolvimento web RS, freelancer Santa Maria, sites rápidos, sites acessíveis, sites para pequenos negócios, sites para empresas locais, desenvolvimento web acessível, sites institucionais rápidos, criação de sites profissionais, sites para negócios locais, desenvolvedor web freelancer Santa Maria, sites institucionais acessíveis, criação de sites para empresas, sites para pequenos negócios Santa Maria, desenvolvimento web rápido, sites institucionais para empresas, criação de sites acessíveis Santa Maria",
     // Bio do autor para SEO
     authorBio: "Leonardo Felipe da Silva dos Santos é desenvolvedor web especializado em criação de sites institucionais rápidos e acessíveis para pequenos negócios em Santa Maria - RS."
   },
