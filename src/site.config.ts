@@ -4,6 +4,15 @@
 // atualizar textos, projetos do portfólio e planos.
 // ============================================================================
 
+export type BlogPost = {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  image?: string;
+  content: string;
+};
+
 export type PortfolioItem = {
   name: string;
   niche: string;
@@ -63,6 +72,7 @@ export interface SiteConfig {
     web3formsKey: string;
     showForm: boolean;
   };
+  blogPosts: BlogPost[];
   seo: {
     ogImage: string; // imagem de preview ao compartilhar o link (1200x630 recomendado)
     keywords?: string; // palavras-chave personalizadas (opcional)
@@ -187,6 +197,32 @@ export const defaultSiteConfig: SiteConfig = {
     web3formsKey: "SUA_CHAVE_WEB3FORMS_AQUI",
     showForm: true,
   },
+  blogPosts: [
+    {
+      slug: "criacao-sites-santa-maria",
+      title: "Criação de Sites em Santa Maria: Tudo o que Você Precisa Saber",
+      description: "Descubra como criar um site profissional em Santa Maria e impulsione seu negócio local com presença online.",
+      date: "15 de Outubro, 2025",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80",
+      content: "Se você está procurando por criação de sites em Santa Maria, chegou ao lugar certo. Ter um site profissional é essencial para qualquer negócio local que deseja crescer e atrair mais clientes. Neste artigo, vamos explorar tudo o que você precisa saber sobre a criação de sites em Santa Maria.<br><br>Por que Ter um Site é Importante para Seu Negócio em Santa Maria:<br>- Visibilidade nas buscas do Google.<br>- Credibilidade frente aos concorrentes.<br>- Disponibilidade 24 horas."
+    },
+    {
+      slug: "desenvolvimento-web-rapido",
+      title: "Desenvolvimento Web Rápido: Como Ter Seu Site em Poucos Dias",
+      description: "Aprenda como o desenvolvimento web rápido pode ajudar seu negócio a marcar presença online em poucos dias.",
+      date: "22 de Outubro, 2025",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&q=80",
+      content: "No mundo digital de hoje, a velocidade é fundamental. Se você está procurando por desenvolvimento web rápido, este artigo é para você. Vamos explicar como ter seu site pronto em poucos dias, sem perder qualidade.<br><br>Vantagens de um Site Rápido:<br>- Experiência do usuário impecável.<br>- Posicionamento superior no Google.<br>- Maior taxa de conversão para clientes."
+    },
+    {
+      slug: "quanto-custa-criar-um-site-em-santa-maria-2025",
+      title: "Quanto Custa Criar um Site em Santa Maria?",
+      description: "Análise completa dos custos para desenvolver um site institucional ou landing page para sua empresa em Santa Maria - RS.",
+      date: "02 de Novembro, 2025",
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=500&fit=crop&q=80",
+      content: "Uma das dúvidas mais comuns dos empreendedores é sobre o investimento necessário para colocar uma empresa na internet. Oferecemos opções acessíveis com planos a partir de R$ 500 de setup inicial + taxa mensal de manutenção que já inclui hospedagem e domínio."
+    }
+  ],
   seo: {
     // Foto real (Unsplash), recortada em 1200x630 — aparece quando o link
     // é compartilhado no WhatsApp, Instagram, etc.

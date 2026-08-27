@@ -3,10 +3,6 @@ import { defaultSiteConfig, type SiteConfig } from "../site.config";
 
 const ROW_ID = "main";
 
-// Busca o conteúdo salvo pelo /admin. Sem Supabase configurado, com a
-// tabela ainda vazia, ou em caso de erro de rede: cai pro conteúdo
-// padrão (defaultSiteConfig) — o site nunca fica quebrado por causa do
-// admin.
 export async function getSiteContent(): Promise<SiteConfig> {
 	if (!supabase) return defaultSiteConfig;
 
@@ -17,15 +13,20 @@ export async function getSiteContent(): Promise<SiteConfig> {
 			.eq("id", ROW_ID)
 			.maybeSingle();
 
-		if (error || !data?.data) return defaultSiteConfig;
-		return data.data as SiteConfig;
+		if (error || !data?.data) {
+			return defaultSiteConfig;
+		}
+
+		const content = data.data as SiteConfig;
+		if (!content.blogPosts || content.blogPosts.length === 0) {
+			content.blogPosts = defaultSiteConfig.blogPosts;
+		}
+		return content;
 	} catch {
 		return defaultSiteConfig;
 	}
 }
 
-// Usado pelo /admin pra salvar edições. Faz upsert: cria a linha "main"
-// na primeira vez que alguém salva, atualiza depois disso.
 export async function saveSiteContent(content: SiteConfig) {
 	if (!supabase) {
 		throw new Error("Supabase não configurado — defina PUBLIC_SUPABASE_URL e PUBLIC_SUPABASE_ANON_KEY.");

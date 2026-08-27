@@ -1,138 +1,36 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { defaultSiteConfig } from '../../site.config';
+import { getSiteContent } from '../../lib/content';
 
 export function getStaticPaths() {
-  const posts = [
-    {
-      slug: 'criacao-sites-santa-maria',
-      title: 'Criação de Sites em Santa Maria: Tudo o que Você Precisa Saber',
-      date: '15 de Outubro, 2025',
-      description: 'Descubra como criar um site profissional em Santa Maria e impulsione seu negócio local com presença online.',
-      content: `
-        <p>Se você está procurando por <strong>criação de sites em Santa Maria</strong>, chegou ao lugar certo. Ter um site profissional é essencial para qualquer negócio local que deseja crescer e atrair mais clientes. Neste artigo, vamos explorar tudo o que você precisa saber sobre a criação de sites em Santa Maria.</p>
-        <h2>Por que Ter um Site é Importante para Seu Negócio em Santa Maria</h2>
-        <p>Ter um site profissional oferece inúmeras vantagens para o seu negócio:</p>
-        <ul>
-          <li><strong>Visibilidade</strong>: Apareça nas buscas do Google quando clientes procurarem por seus serviços.</li>
-          <li><strong>Credibilidade</strong>: Passe muito mais confiança do que concorrentes que têm apenas redes sociais.</li>
-          <li><strong>Independência</strong>: Suas informações disponíveis 24 horas por dia, sem depender de algoritmos de redes sociais.</li>
-        </ul>
-        <h2>Como Funciona a Criação de Sites Profissionais</h2>
-        <p>Desenvolvemos sites institucionais rápidos, modernos e otimizados para conversão, perfeitos para oficinas, salões, clínicas e comércios locais em Santa Maria - RS.</p>
-      `
-    },
-    {
-      slug: 'desenvolvimento-web-rapido',
-      title: 'Desenvolvimento Web Rápido: Como Ter Seu Site em Poucos Dias',
-      date: '22 de Outubro, 2025',
-      description: 'Aprenda como o desenvolvimento web rápido pode ajudar seu negócio a marcar presença online em poucos dias.',
-      content: `
-        <p>No mundo digital de hoje, a velocidade é fundamental. Se você está procurando por <strong>desenvolvimento web rápido</strong>, este artigo é para você. Vamos explicar como ter seu site pronto em poucos dias, sem perder qualidade.</p>
-        <h2>O Que é Desenvolvimento Web Rápido?</h2>
-        <p>É a abordagem que utiliza tecnologias modernas (como Astro e Tailwind) para entregar sites institucionais robustos e velozes em tempo recorde.</p>
-        <h2>Vantagens de um Site Rápido</h2>
-        <ul>
-          <li><strong>Carregamento Instantâneo</strong>: Clientes não esperam sites lentos.</li>
-          <li><strong>Melhor SEO</strong>: O Google prioriza páginas ultrarrápidas.</li>
-        </ul>
-      `
-    },
-    {
-      slug: 'quanto-custa-criar-um-site-em-santa-maria-2025',
-      title: 'Quanto Custa Criar um Site em Santa Maria em 2025?',
-      date: '02 de Novembro, 2025',
-      description: 'Análise completa dos custos para desenvolver um site institucional ou landing page para sua empresa em Santa Maria - RS.',
-      content: `
-        <p>Uma das dúvidas mais comuns dos empreendedores é sobre o investimento necessário para colocar uma empresa na internet. Em 2025, o mercado de <strong>criação de sites em Santa Maria</strong> oferece opções acessíveis para pequenos negócios.</p>
-        <h2>Modelos de Investimento</h2>
-        <p>Trabalhamos com planos a partir de R$ 500 de setup inicial + taxa mensal de manutenção que já inclui hospedagem e domínio. Ideal para quem quer começar sem comprometer o caixa.</p>
-      `
-    },
-    {
-      slug: 'importancia-do-seo-local-para-comercios',
-      title: 'A Importância do SEO Local para Comércios e Prestadores de Serviços',
-      date: '10 de Novembro, 2025',
-      description: 'Como aparecer nas primeiras posições do Google para clientes na sua região em Santa Maria.',
-      content: `
-        <p>O <strong>SEO local</strong> é a estratégia definitiva para atrair clientes que estão procurando exatamente o seu serviço no seu bairro ou cidade.</p>
-        <p>Combinando meta tags otimizadas, dados estruturados (Schema.org) e um site rápido, seu negócio ganha destaque imediato nas buscas orgânicas.</p>
-      `
-    },
-    {
-      slug: 'por-que-evitar-wordpress-em-sites-institucionais',
-      title: 'Por Que Evitar WordPress em Sites Institucionais de Pequenos Negócios?',
-      date: '17 de Novembro, 2025',
-      description: 'Entenda por que código moderno e estático supera plataformas pesadas em segurança, velocidade e custo.',
-      content: `
-        <p>Muitas agências ainda empurram WordPress para qualquer tipo de site. No entanto, para sites institucionais de pequenos negócios, plataformas cheias de plugins geram lentidão, brechas de segurança e custos desnecessários de manutenção.</p>
-        <p>Com sites estáticos desenvolvidos em Astro, garantimos performance máxima e zero dor de cabeça com invasões.</p>
-      `
-    },
-    {
-      slug: 'como-atrair-mais-clientes-pelo-whatsapp-atraves-do-site',
-      title: 'Como Atrair Mais Clientes pelo WhatsApp Através do Seu Site',
-      date: '24 de Novembro, 2025',
-      description: 'Dicas práticas de conversão para transformar visitantes do seu site em conversas diretas no WhatsApp.',
-      content: `
-        <p>Ter tráfego no site não adianta nada se o cliente não entrar em contato. O segredo está em colocar botões de chamada para ação (CTA) estratégicos e flutuantes conectados diretamente ao seu <strong>WhatsApp</strong>.</p>
-      `
-    },
-    {
-      slug: 'site-institucional-vs-redes-sociais-qual-escolher',
-      title: 'Site Institucional vs. Redes Sociais: Qual a Melhor Escolha para Sua Empresa?',
-      date: '01 de Dezembro, 2025',
-      description: 'Descubra por que depender apenas de Instagram e Facebook pode limitar o crescimento do seu negócio.',
-      content: `
-        <p>Redes sociais são ótimas para engajamento, mas o perfil pode cair, o alcance orgânico diminui e você não é dono da sua audiência. Um <strong>site institucional</strong> é seu endereço definitivo na internet, gerando autoridade perante o Google e seus clientes.</p>
-      `
-    },
-    {
-      slug: 'tendencias-de-design-e-desenvolvimento-web',
-      title: 'Tendências de Design e Desenvolvimento Web para Negócios Locais',
-      date: '08 de Dezembro, 2025',
-      description: 'O que faz um site moderno converter mais em 2025 e nos próximos anos.',
-      content: `
-        <p>Minimalismo, tipografia legível, carregamento instantâneo e foco total no mobile (celular) são os pilares dos sites que realmente trazem retorno financeiro para os proprietários.</p>
-      `
-    },
-    {
-      slug: 'como-preparar-sua-empresa-para-o-final-de-ano-online',
-      title: 'Como Preparar Sua Empresa para Aumentar as Vendas com Presença Online',
-      date: '15 de Dezembro, 2025',
-      description: 'Estratégias rápidas para posicionar sua marca nas buscas de fim de ano em Santa Maria.',
-      content: `
-        <p>As datas comemorativas de fim de ano movimentam o comércio local. Estar bem posicionado no Google garante que clientes em busca de presentes e serviços de última hora encontrem a sua empresa primeiro.</p>
-      `
-    },
-    {
-      slug: 'retrospectiva-e-planejamento-digital-para-sua-empresa',
-      title: 'Planejamento Digital 2026: É Hora de Colocar Sua Empresa na Internet',
-      date: '22 de Dezembro, 2025',
-      description: 'Planeje o próximo ano com um site profissional e garanta novos clientes desde o primeiro dia.',
-      content: `
-        <p>Comece o próximo ano na frente da concorrência. Se o seu negócio ainda não tem um site institucional rápido e profissional, agora é o momento ideal para planejar sua presença digital com investimento acessível.</p>
-      `
-    }
+  // Para suporte a rotas estáticas na Vercel com os slugs padrão
+  return [
+    { params: { slug: 'criacao-sites-santa-maria' } },
+    { params: { slug: 'desenvolvimento-web-rapido' } },
+    { params: { slug: 'quanto-custa-criar-um-site-em-santa-maria-2025' } }
   ];
-
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
 }
 
-const { title, date, description, content } = Astro.props;
+const { slug } = Astro.params;
+const siteConfig = await getSiteContent();
+const post = siteConfig.blogPosts.find((p) => p.slug === slug) || siteConfig.blogPosts[0];
 ---
 
-<Layout siteConfig={defaultSiteConfig} title={`${title} — Blog Leonardo Santos`} description={description}>
+<Layout siteConfig={siteConfig} title={`${post.title} — Blog Leonardo Santos`} description={post.description}>
   <main class="py-20 px-4 sm:px-6 max-w-3xl mx-auto">
     <div class="mb-8">
       <a href="/blog" class="text-sm font-semibold text-[var(--color-primary)] hover:underline">&larr; Voltar para o Blog</a>
-      <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight">{title}</h1>
-      <time class="mt-2 block text-sm text-slate-500">{date}</time>
+      <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight">{post.title}</h1>
+      <time class="mt-2 block text-sm text-slate-500">{post.date}</time>
     </div>
 
-    <article class="prose prose-slate lg:prose-lg max-w-none space-y-6 text-slate-700 leading-relaxed" set:html={content} />
+    {post.image && (
+      <div class="mb-8">
+        <img src={post.image} alt={post.title} class="w-full h-80 object-cover rounded-2xl shadow-md" />
+      </div>
+    )}
+
+    <article class="prose prose-slate lg:prose-lg max-w-none space-y-6 text-slate-700 leading-relaxed" set:html={post.content} />
   </main>
 </Layout>
