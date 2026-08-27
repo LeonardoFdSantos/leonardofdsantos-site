@@ -1,14 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { defaultSiteConfig } from '../../site.config';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { getSiteContent } from '../../lib/content';
 
 export function getStaticPaths() {
-  // Para suporte a rotas estáticas na Vercel com os slugs padrão
   return [
     { params: { slug: 'criacao-sites-santa-maria' } },
     { params: { slug: 'desenvolvimento-web-rapido' } },
-    { params: { slug: 'quanto-custa-criar-um-site-em-santa-maria-2025' } }
+    { params: { slug: 'quanto-custa-criar-um-site-em-santa-maria-2025' } },
+    { params: { slug: 'importancia-do-seo-local-para-comercios' } },
+    { params: { slug: 'por-que-evitar-wordpress-em-sites-institucionais' } },
+    { params: { slug: 'como-atrair-mais-clientes-pelo-whatsapp-atraves-do-site' } }
   ];
 }
 
@@ -18,19 +22,28 @@ const post = siteConfig.blogPosts.find((p) => p.slug === slug) || siteConfig.blo
 ---
 
 <Layout siteConfig={siteConfig} title={`${post.title} — Blog Leonardo Santos`} description={post.description}>
+  <Header siteConfig={siteConfig} />
+
   <main class="py-20 px-4 sm:px-6 max-w-3xl mx-auto">
     <div class="mb-8">
-      <a href="/blog" class="text-sm font-semibold text-[var(--color-primary)] hover:underline">&larr; Voltar para o Blog</a>
-      <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight">{post.title}</h1>
-      <time class="mt-2 block text-sm text-slate-500">{post.date}</time>
+      <a href="/blog" class="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-primary)] hover:underline mb-4">
+        &larr; Voltar para o Blog
+      </a>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight leading-tight">{post.title}</h1>
+      <time class="mt-3 block text-sm text-slate-500 font-medium">{post.date}</time>
     </div>
 
     {post.image && (
-      <div class="mb-8">
-        <img src={post.image} alt={post.title} class="w-full h-80 object-cover rounded-2xl shadow-md" />
+      <div class="mb-10 rounded-3xl overflow-hidden shadow-xl border border-slate-200/80">
+        <img src={post.image} alt={post.title} class="w-full h-80 sm:h-96 object-cover" />
       </div>
     )}
 
-    <article class="prose prose-slate lg:prose-lg max-w-none space-y-6 text-slate-700 leading-relaxed" set:html={post.content} />
+    <article class="prose prose-slate lg:prose-lg max-w-none space-y-6 text-slate-700 leading-relaxed bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-sm">
+      <div set:html={post.content} />
+    </article>
   </main>
+
+  <Footer siteConfig={siteConfig} />
+  <WhatsAppButton siteConfig={siteConfig} />
 </Layout>
