@@ -3,66 +3,123 @@ import Layout from '../../layouts/Layout.astro';
 import { defaultSiteConfig } from '../../site.config';
 
 export function getStaticPaths() {
-  return [
+  const posts = [
     {
-      params: { slug: 'criacao-sites-santa-maria' },
-      props: {
-        title: 'Criação de Sites em Santa Maria: Tudo o que Você Precisa Saber',
-        date: '15 de Outubro, 2023',
-        description: 'Descubra como criar um site profissional em Santa Maria e impulsione seu negócio local com presença online.',
-        content: `
-          <p>Se você está procurando por <strong>criação de sites em Santa Maria</strong>, chegou ao lugar certo. Ter um site profissional é essencial para qualquer negócio local que deseja crescer e atrair mais clientes. Neste artigo, vamos explorar tudo o que você precisa saber sobre a criação de sites em Santa Maria.</p>
-
-          <h2>Por que Ter um Site é Importante para Seu Negócio em Santa Maria</h2>
-          <p>Ter um site profissional oferece inúmeras vantagens para o seu negócio em Santa Maria:</p>
-          <ul>
-            <li><strong>Visibilidade</strong>: Um site bem otimizado aparece nos resultados de busca do Google, atraindo mais clientes.</li>
-            <li><strong>Credibilidade</strong>: Um site profissional passa confiança e credibilidade para os seus clientes.</li>
-            <li><strong>Acessibilidade</strong>: Seus clientes podem acessar informações sobre o seu negócio a qualquer hora, de qualquer lugar.</li>
-          </ul>
-
-          <h2>Como Criar um Site em Santa Maria</h2>
-          <p>Criar um site em Santa Maria é um processo simples e rápido. Aqui estão os passos básicos:</p>
-          <ol>
-            <li><strong>Defina o Objetivo do Site</strong>: Determine o que você quer alcançar com o seu site.</li>
-            <li><strong>Escolha um Domínio</strong>: Selecione um nome de domínio que seja fácil de lembrar e relevante para o seu negócio.</li>
-            <li><strong>Desenvolvimento</strong>: Crie o design e a estrutura do site.</li>
-            <li><strong>Conteúdo</strong>: Adicione conteúdo relevante e otimizado para SEO.</li>
-            <li><strong>Lançamento</strong>: Publique o site e comece a atrair visitantes.</li>
-          </ol>
-
-          <h2>Conclusão</h2>
-          <p>Ter um site profissional é essencial para qualquer negócio em Santa Maria que deseja crescer e atrair mais clientes. Se você está procurando por criação de sites em Santa Maria, não hesite em entrar em contato para obter um site profissional e bem otimizado para o seu negócio.</p>
-        `
-      }
+      slug: 'criacao-sites-santa-maria',
+      title: 'Criação de Sites em Santa Maria: Tudo o que Você Precisa Saber',
+      date: '15 de Outubro, 2025',
+      description: 'Descubra como criar um site profissional em Santa Maria e impulsione seu negócio local com presença online.',
+      content: `
+        <p>Se você está procurando por <strong>criação de sites em Santa Maria</strong>, chegou ao lugar certo. Ter um site profissional é essencial para qualquer negócio local que deseja crescer e atrair mais clientes. Neste artigo, vamos explorar tudo o que você precisa saber sobre a criação de sites em Santa Maria.</p>
+        <h2>Por que Ter um Site é Importante para Seu Negócio em Santa Maria</h2>
+        <p>Ter um site profissional oferece inúmeras vantagens para o seu negócio:</p>
+        <ul>
+          <li><strong>Visibilidade</strong>: Apareça nas buscas do Google quando clientes procurarem por seus serviços.</li>
+          <li><strong>Credibilidade</strong>: Passe muito mais confiança do que concorrentes que têm apenas redes sociais.</li>
+          <li><strong>Independência</strong>: Suas informações disponíveis 24 horas por dia, sem depender de algoritmos de redes sociais.</li>
+        </ul>
+        <h2>Como Funciona a Criação de Sites Profissionais</h2>
+        <p>Desenvolvemos sites institucionais rápidos, modernos e otimizados para conversão, perfeitos para oficinas, salões, clínicas e comércios locais em Santa Maria - RS.</p>
+      `
     },
     {
-      params: { slug: 'desenvolvimento-web-rapido' },
-      props: {
-        title: 'Desenvolvimento Web Rápido: Como Ter Seu Site em Poucos Dias',
-        date: '20 de Outubro, 2023',
-        description: 'Aprenda como o desenvolvimento web rápido pode ajudar seu negócio a marcar presença online em poucos dias.',
-        content: `
-          <p>No mundo digital de hoje, a velocidade é fundamental. Se você está procurando por <strong>desenvolvimento web rápido</strong>, este artigo é para você. Vamos explicar como ter seu site pronto em poucos dias, sem perder qualidade.</p>
-
-          <h2>O Que é Desenvolvimento Web Rápido?</h2>
-          <p>O desenvolvimento web rápido é uma abordagem que prioriza a agilidade na criação de sites, utilizando tecnologias modernas e frameworks eficientes como Astro e Tailwind CSS. Isso permite entregar sites institucionais de alta qualidade em tempo recorde.</p>
-
-          <h2>Vantagens de um Site Rápido</h2>
-          <p>Ter um site rápido traz inúmeros benefícios:</p>
-          <ul>
-            <li><strong>Experiência do Usuário</strong>: Visitantes odeiam sites lentos. Sites rápidos mantêm os usuários engajados.</li>
-            <li><strong>SEO (Google)</strong>: O Google prioriza sites que carregam rapidamente nos resultados de busca.</li>
-            <li><strong>Conversão</strong>: Sites rápidos convertem mais visitantes em clientes.</li>
-          </ul>
-
-          <h2>Como Conseguir um Site Rápido em Santa Maria</h2>
-          <p>Se você é de Santa Maria e precisa de um site rápido, a solução é contratar um desenvolvedor especializado que utilize ferramentas modernas (sem WordPress pesado e cheio de plugins lentos).</p>
-          <p>Entre em contato para saber como podemos ter seu site no ar em até 48 horas!</p>
-        `
-      }
+      slug: 'desenvolvimento-web-rapido',
+      title: 'Desenvolvimento Web Rápido: Como Ter Seu Site em Poucos Dias',
+      date: '22 de Outubro, 2025',
+      description: 'Aprenda como o desenvolvimento web rápido pode ajudar seu negócio a marcar presença online em poucos dias.',
+      content: `
+        <p>No mundo digital de hoje, a velocidade é fundamental. Se você está procurando por <strong>desenvolvimento web rápido</strong>, este artigo é para você. Vamos explicar como ter seu site pronto em poucos dias, sem perder qualidade.</p>
+        <h2>O Que é Desenvolvimento Web Rápido?</h2>
+        <p>É a abordagem que utiliza tecnologias modernas (como Astro e Tailwind) para entregar sites institucionais robustos e velozes em tempo recorde.</p>
+        <h2>Vantagens de um Site Rápido</h2>
+        <ul>
+          <li><strong>Carregamento Instantâneo</strong>: Clientes não esperam sites lentos.</li>
+          <li><strong>Melhor SEO</strong>: O Google prioriza páginas ultrarrápidas.</li>
+        </ul>
+      `
+    },
+    {
+      slug: 'quanto-custa-criar-um-site-em-santa-maria-2025',
+      title: 'Quanto Custa Criar um Site em Santa Maria em 2025?',
+      date: '02 de Novembro, 2025',
+      description: 'Análise completa dos custos para desenvolver um site institucional ou landing page para sua empresa em Santa Maria - RS.',
+      content: `
+        <p>Uma das dúvidas mais comuns dos empreendedores é sobre o investimento necessário para colocar uma empresa na internet. Em 2025, o mercado de <strong>criação de sites em Santa Maria</strong> oferece opções acessíveis para pequenos negócios.</p>
+        <h2>Modelos de Investimento</h2>
+        <p>Trabalhamos com planos a partir de R$ 500 de setup inicial + taxa mensal de manutenção que já inclui hospedagem e domínio. Ideal para quem quer começar sem comprometer o caixa.</p>
+      `
+    },
+    {
+      slug: 'importancia-do-seo-local-para-comercios',
+      title: 'A Importância do SEO Local para Comércios e Prestadores de Serviços',
+      date: '10 de Novembro, 2025',
+      description: 'Como aparecer nas primeiras posições do Google para clientes na sua região em Santa Maria.',
+      content: `
+        <p>O <strong>SEO local</strong> é a estratégia definitiva para atrair clientes que estão procurando exatamente o seu serviço no seu bairro ou cidade.</p>
+        <p>Combinando meta tags otimizadas, dados estruturados (Schema.org) e um site rápido, seu negócio ganha destaque imediato nas buscas orgânicas.</p>
+      `
+    },
+    {
+      slug: 'por-que-evitar-wordpress-em-sites-institucionais',
+      title: 'Por Que Evitar WordPress em Sites Institucionais de Pequenos Negócios?',
+      date: '17 de Novembro, 2025',
+      description: 'Entenda por que código moderno e estático supera plataformas pesadas em segurança, velocidade e custo.',
+      content: `
+        <p>Muitas agências ainda empurram WordPress para qualquer tipo de site. No entanto, para sites institucionais de pequenos negócios, plataformas cheias de plugins geram lentidão, brechas de segurança e custos desnecessários de manutenção.</p>
+        <p>Com sites estáticos desenvolvidos em Astro, garantimos performance máxima e zero dor de cabeça com invasões.</p>
+      `
+    },
+    {
+      slug: 'como-atrair-mais-clientes-pelo-whatsapp-atraves-do-site',
+      title: 'Como Atrair Mais Clientes pelo WhatsApp Através do Seu Site',
+      date: '24 de Novembro, 2025',
+      description: 'Dicas práticas de conversão para transformar visitantes do seu site em conversas diretas no WhatsApp.',
+      content: `
+        <p>Ter tráfego no site não adianta nada se o cliente não entrar em contato. O segredo está em colocar botões de chamada para ação (CTA) estratégicos e flutuantes conectados diretamente ao seu <strong>WhatsApp</strong>.</p>
+      `
+    },
+    {
+      slug: 'site-institucional-vs-redes-sociais-qual-escolher',
+      title: 'Site Institucional vs. Redes Sociais: Qual a Melhor Escolha para Sua Empresa?',
+      date: '01 de Dezembro, 2025',
+      description: 'Descubra por que depender apenas de Instagram e Facebook pode limitar o crescimento do seu negócio.',
+      content: `
+        <p>Redes sociais são ótimas para engajamento, mas o perfil pode cair, o alcance orgânico diminui e você não é dono da sua audiência. Um <strong>site institucional</strong> é seu endereço definitivo na internet, gerando autoridade perante o Google e seus clientes.</p>
+      `
+    },
+    {
+      slug: 'tendencias-de-design-e-desenvolvimento-web',
+      title: 'Tendências de Design e Desenvolvimento Web para Negócios Locais',
+      date: '08 de Dezembro, 2025',
+      description: 'O que faz um site moderno converter mais em 2025 e nos próximos anos.',
+      content: `
+        <p>Minimalismo, tipografia legível, carregamento instantâneo e foco total no mobile (celular) são os pilares dos sites que realmente trazem retorno financeiro para os proprietários.</p>
+      `
+    },
+    {
+      slug: 'como-preparar-sua-empresa-para-o-final-de-ano-online',
+      title: 'Como Preparar Sua Empresa para Aumentar as Vendas com Presença Online',
+      date: '15 de Dezembro, 2025',
+      description: 'Estratégias rápidas para posicionar sua marca nas buscas de fim de ano em Santa Maria.',
+      content: `
+        <p>As datas comemorativas de fim de ano movimentam o comércio local. Estar bem posicionado no Google garante que clientes em busca de presentes e serviços de última hora encontrem a sua empresa primeiro.</p>
+      `
+    },
+    {
+      slug: 'retrospectiva-e-planejamento-digital-para-sua-empresa',
+      title: 'Planejamento Digital 2026: É Hora de Colocar Sua Empresa na Internet',
+      date: '22 de Dezembro, 2025',
+      description: 'Planeje o próximo ano com um site profissional e garanta novos clientes desde o primeiro dia.',
+      content: `
+        <p>Comece o próximo ano na frente da concorrência. Se o seu negócio ainda não tem um site institucional rápido e profissional, agora é o momento ideal para planejar sua presença digital com investimento acessível.</p>
+      `
     }
   ];
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
 }
 
 const { title, date, description, content } = Astro.props;
