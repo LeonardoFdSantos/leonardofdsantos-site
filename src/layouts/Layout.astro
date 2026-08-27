@@ -35,7 +35,7 @@ const keywords = seo?.keywords || [
   "site institucional empresa local"
 ].join(", ");
 
-// Schema.org JSON-LD - dados estruturados para SEO
+// Schema.org JSON-LD - dados estruturados para SEO avançado com FAQ e Reviews
 const schemaOrg = {
   "@context": "https://schema.org",
   "@graph": [
@@ -75,7 +75,7 @@ const schemaOrg = {
       "@id": `${SITE_URL}#service`,
       "name": personal.name,
       "description": personal.description,
-      "serviceType": "Web Design",
+      "serviceType": "Criação de Sites Institucionais",
       "provider": {
         "@id": `${SITE_URL}#person`
       },
@@ -93,6 +93,11 @@ const schemaOrg = {
           "name": "Brasil"
         }
       ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "12"
+      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Planos de Criação de Sites",
@@ -120,6 +125,35 @@ const schemaOrg = {
           }
         ]
       }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quanto tempo demora para criar um site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A primeira demo do seu site institucional fica pronta em até 48 horas após o envio das informações iniciais."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso pagar mensalidade para ter um site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trabalhamos com um modelo de taxa de setup inicial e uma mensalidade acessível que já inclui hospedagem, domínio e suporte para pequenos ajustes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vocês usam WordPress?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. Desenvolvemos sites modernos ultra-rápidos sem WordPress, eliminando lentidão e falhas de segurança comuns em plugins."
+          }
+        }
+      ]
     },
     {
       "@type": "WebSite",

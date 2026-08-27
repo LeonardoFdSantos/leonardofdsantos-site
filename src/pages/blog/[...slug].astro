@@ -1,0 +1,32 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { defaultSiteConfig } from '../../../site.config';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+// Obtém todos os posts do blog
+const posts = await getCollection('blog');
+
+// Pega o primeiro slug da URL (ex: /blog/criacao-sites-santa-maria)
+const slug = Astro.params.slug[0];
+
+// Encontra o post correspondente ao slug
+const post = posts.find((p: CollectionEntry<'blog'>) => p.slug === slug);
+
+if (!post) {
+  throw new Error('Post não encontrado');
+}
+---
+
+<Layout siteConfig={defaultSiteConfig} title={`${post.data.title} — Blog Leonardo Santos`} description={post.data.description}>
+  <main class="py-20 px-4 sm:px-6 max-w-4xl mx-auto">
+    <div class="mb-12">
+      <a href="/blog" class="text-sm font-semibold text-[var(--color-primary)] hover:underline">&larr; Voltar para o Blog</a>
+      <h1 class="mt-4 text-4xl font-extrabold text-[var(--color-secondary)] tracking-tight">{post.data.title}</h1>
+      <time class="mt-2 text-sm text-slate-500">{post.data.date}</time>
+    </div>
+
+    <article class="prose max-w-none">
+      <AstroContent />
+    </article>
+  </main>
+</Layout>
