@@ -190,7 +190,7 @@ export const defaultSiteConfig: SiteConfig = {
       title: "Criação de Sites no Rio Grande do Sul: Como Destacar Sua Empresa no RS",
       description: "Guia completo de desenvolvimento web e criação de sites profissionais para empresas em todo o Rio Grande do Sul.",
       date: "10 de Outubro, 2025",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80",
+      image: "/blog-default.svg",
       content: "Se você tem uma empresa no Rio Grande do Sul e ainda depende apenas de indicações ou redes sociais, está perdendo vendas todos os dias. A criação de sites profissionais no RS é o passo definitivo para consolidar sua marca e atrair clientes qualificados.<br><br>Por que ter um site no RS?<br>- Alcance estadual ou municipal imediato.<br>- Autoridade perante os concorrentes locais.<br>- Vendas 24 horas por dia."
     },
     {
@@ -350,7 +350,7 @@ export const defaultSiteConfig: SiteConfig = {
       title: "Por que a Velocidade do Seu Site é o Fator de Ranking Mais Ignorado",
       description: "Como um site lento mata suas chances de aparecer nas primeiras posições do Google.",
       date: "25 de Fevereiro, 2026",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80",
+      image: "/blog-default.svg",
       content: "Google penaliza sites lentos. Nossas soluções em Astro garantem velocidade extrema para seu negócio no RS."
     },
     {
@@ -558,7 +558,7 @@ export const defaultSiteConfig: SiteConfig = {
       title: "Criação de Sites Profissionais no RS: Tendências para 2026",
       description: "Veja o que há de mais moderno em design e tecnologia para sites de negócios em 2026.",
       date: "26 de Agosto, 2026",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80",
+      image: "/blog-default.svg",
       content: "Esteja à frente da concorrência. Conheça as estratégias para o mercado digital no RS em 2026."
     }
 
