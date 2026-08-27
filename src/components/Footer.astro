@@ -11,15 +11,44 @@ const waLink = `https://wa.me/${personal.whatsapp}`;
 const igLink = personal.instagram ? `https://instagram.com/${personal.instagram}` : undefined;
 ---
 
-<footer class="border-t border-slate-100 py-10" itemscope itemtype="https://schema.org/Person">
+<footer class="border-t border-slate-200 bg-slate-50 py-12" itemscope itemtype="https://schema.org/Person">
 	<meta itemprop="name" content={personal.name} />
 	<meta itemprop="jobTitle" content={personal.role} />
-	<div class="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-		<p class="text-sm text-slate-500">&copy; {year} <span itemprop="name">{personal.name}</span>. <span itemprop="jobTitle">{personal.role}</span> em <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality">{personal.city}</span></span>. Todos os direitos reservados.</p>
-		<div class="flex items-center gap-5 text-sm font-medium text-slate-500">
-			<a href={waLink} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-primary)] transition-colors" aria-label="Falar com {personal.name} no WhatsApp">WhatsApp</a>
-			{igLink && <a href={igLink} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-primary)] transition-colors" aria-label="Seguir {personal.name} no Instagram">Instagram</a>}
-			<a href="/#topo" class="hover:text-[var(--color-primary)] transition-colors">Voltar ao topo ↑</a>
+	<div class="mx-auto max-w-6xl px-4 sm:px-6">
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10 pb-10 border-b border-slate-200">
+			<div class="md:col-span-2">
+				<h3 class="text-lg font-bold text-[var(--color-secondary)] mb-3">{personal.name}</h3>
+				<p class="text-sm text-slate-600 max-w-sm leading-relaxed">
+					{personal.tagline}. Sites institucionais rápidos, sem WordPress e focados em gerar vendas para o seu negócio no Rio Grande do Sul.
+				</p>
+			</div>
+			<div>
+				<h4 class="text-sm font-bold text-[var(--color-secondary)] uppercase tracking-wider mb-4">Navegação</h4>
+				<ul class="space-y-2 text-sm text-slate-600">
+					<li><a href="/" class="hover:text-[var(--color-primary)] transition-colors">Início</a></li>
+					<li><a href="/#sobre" class="hover:text-[var(--color-primary)] transition-colors">Sobre</a></li>
+					<li><a href="/portfolio" class="hover:text-[var(--color-primary)] transition-colors">Portfólio</a></li>
+					<li><a href="/#planos" class="hover:text-[var(--color-primary)] transition-colors">Planos & Preços</a></li>
+					<li><a href="/blog" class="hover:text-[var(--color-primary)] transition-colors">Blog & SEO Local</a></li>
+					<li><a href="/#contato" class="hover:text-[var(--color-primary)] transition-colors">Contato</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="text-sm font-bold text-[var(--color-secondary)] uppercase tracking-wider mb-4">Contato & Redes</h4>
+				<ul class="space-y-2 text-sm text-slate-600">
+					<li><a href={waLink} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-primary)] transition-colors">WhatsApp Comercial</a></li>
+					{igLink && <li><a href={igLink} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-primary)] transition-colors">Instagram (@{personal.instagram})</a></li>}
+					<li><a href={`mailto:${personal.email}`} class="hover:text-[var(--color-primary)] transition-colors">{personal.email}</a></li>
+					<li class="pt-2 text-xs text-slate-500">Atendimento em Porto Alegre, Caxias do Sul, Pelotas, Santa Maria, Canoas e todo o RS.</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+			<p>&copy; {year} <span itemprop="name">{personal.name}</span>. <span itemprop="jobTitle">{personal.role}</span> em <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality">{personal.city}</span></span>. Todos os direitos reservados.</p>
+			<div class="flex items-center gap-5 font-medium">
+				<a href="/#topo" class="hover:text-[var(--color-primary)] transition-colors">Voltar ao topo ↑</a>
+			</div>
 		</div>
 	</div>
 </footer>
