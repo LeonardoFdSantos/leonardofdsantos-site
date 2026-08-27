@@ -6,7 +6,15 @@ interface Props {
 }
 
 const { siteConfig } = Astro.props;
-const recentPosts = siteConfig.blogPosts.slice(0, 3);
+
+// Ordena os posts do mais novo para o mais velho
+const sortedPosts = [...siteConfig.blogPosts].sort((a, b) => {
+  const dateA = new Date(a.date.split(' de ').reverse().join('-'));
+  const dateB = new Date(b.date.split(' de ').reverse().join('-'));
+  return dateB - dateA;
+});
+
+const recentPosts = sortedPosts.slice(0, 3);
 ---
 
 <section id="blog-recente" class="py-20 bg-slate-50/70 border-t border-slate-100">

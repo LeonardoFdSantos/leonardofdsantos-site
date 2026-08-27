@@ -5,25 +5,11 @@ import Footer from '../../components/Footer.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { getSiteContent } from '../../lib/content';
 
-export function getStaticPaths() {
-  return [
-    { params: { slug: 'criacao-sites-rio-grande-do-sul' } },
-    { params: { slug: 'desenvolvimento-web-rapido-rs' } },
-    { params: { slug: 'quanto-custa-criar-um-site-rs-2025' } },
-    { params: { slug: 'seo-local-comercios-rs' } },
-    { params: { slug: 'por-que-evitar-wordpress-empresas-rs' } },
-    { params: { slug: 'como-atrair-clientes-whatsapp-site-rs' } },
-    { params: { slug: 'criacao-sites-porto-alegre' } },
-    { params: { slug: 'criacao-sites-caxias-do-sul' } },
-    { params: { slug: 'criacao-sites-pelotas' } },
-    { params: { slug: 'criacao-sites-santa-maria-rs' } },
-    { params: { slug: 'criacao-sites-canoas' } },
-    { params: { slug: 'site-oficina-mecanica-rs' } },
-    { params: { slug: 'site-saloes-beleza-rs' } },
-    { params: { slug: 'site-clinicas-medicas-rs' } },
-    { params: { slug: 'site-lojas-materiais-construcao-rs' } },
-    { params: { slug: 'site-imobiliarias-rs' } }
-  ];
+export async function getStaticPaths() {
+  const siteConfig = await getSiteContent();
+  return siteConfig.blogPosts.map((post) => ({
+    params: { slug: post.slug },
+  }));
 }
 
 const { slug } = Astro.params;

@@ -6,7 +6,12 @@ import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import { getSiteContent } from '../../lib/content';
 
 const siteConfig = await getSiteContent();
-const posts = siteConfig.blogPosts;
+// Ordena posts do mais novo para o mais velho (decrescente por data)
+const posts = [...siteConfig.blogPosts].sort((a, b) => {
+  const dateA = new Date(a.date.split(' de ').reverse().join('-'));
+  const dateB = new Date(b.date.split(' de ').reverse().join('-'));
+  return dateB - dateA; // Mais novo primeiro
+});
 
 const featuredPost = posts[0];
 const otherPosts = posts.slice(1);

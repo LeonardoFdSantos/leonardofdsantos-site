@@ -312,7 +312,256 @@ export const defaultSiteConfig: SiteConfig = {
       date: "21 de Janeiro, 2026",
       image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=500&fit=crop&q=80",
       content: "Venda e alugue mais imóveis com um site profissional otimizado para captação de clientes no Google."
+    },
+    {
+      slug: "site-servicos-limpeza-rs",
+      title: "Como Atrair Clientes para Empresas de Limpeza no Rio Grande do Sul",
+      description: "Sites focados em agendamento de serviços de limpeza residencial e comercial.",
+      date: "28 de Janeiro, 2026",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop&q=80",
+      content: "Empresas de limpeza precisam de agilidade no agendamento. Um site institucional resolve isso."
+    },
+    {
+      slug: "site-academias-rs",
+      title: "Sites para Academias e Personal Trainers no RS: Foco em Matrículas",
+      description: "Como transformar visitantes em alunos através de sites com foco em conversão.",
+      date: "04 de Fevereiro, 2026",
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=500&fit=crop&q=80",
+      content: "A academia precisa de matrículas constantes. O site é sua principal vitrine."
+    },
+    {
+      slug: "site-advocacia-rs",
+      title: "Sites para Advogados e Escritórios de Advocacia no RS: Credibilidade e Ética",
+      description: "Sites que respeitam as normas da OAB e focam na autoridade digital do advogado.",
+      date: "11 de Fevereiro, 2026",
+      image: "https://images.unsplash.com/photo-1589829545856-d138a379435b?w=800&h=500&fit=crop&q=80",
+      content: "Advogados precisam de confiança. Um site institucional transmite a seriedade do escritório."
+    },
+    {
+      slug: "site-petshops-veterinarias-rs",
+      title: "Sites para Pet Shops e Clínicas Veterinárias no RS: Cuidado com o Cliente",
+      description: "Exponha seus serviços de banho, tosa e atendimento veterinário com um site profissional.",
+      date: "18 de Fevereiro, 2026",
+      image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=500&fit=crop&q=80",
+      content: "Destaque seu amor pelos animais com um site bonito e prático para tutores da sua região."
+    },
+    {
+      slug: "importancia-velocidade-site-seo",
+      title: "Por que a Velocidade do Seu Site é o Fator de Ranking Mais Ignorado",
+      description: "Como um site lento mata suas chances de aparecer nas primeiras posições do Google.",
+      date: "25 de Fevereiro, 2026",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80",
+      content: "Google penaliza sites lentos. Nossas soluções em Astro garantem velocidade extrema para seu negócio no RS."
+    },
+    {
+      slug: "site-padarias-confeitarias-rs",
+      title: "Sites para Padarias e Confeitarias no RS: O Sabor do Marketing Digital",
+      description: "Aumente as encomendas de bolos e doces com um site profissional e um cardápio online.",
+      date: "04 de Março, 2026",
+      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=500&fit=crop&q=80",
+      content: "Mostre suas delícias com fotos de alta qualidade e facilite encomendas via WhatsApp."
+    },
+    {
+      slug: "site-escolas-cursos-rs",
+      title: "Sites para Escolas e Cursos Livres no RS: Matrículas Abertas",
+      description: "Plataformas para captação de alunos e apresentação de cursos para empresas gaúchas.",
+      date: "11 de Março, 2026",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=500&fit=crop&q=80",
+      content: "Sua escola precisa mostrar currículo e resultados. Transforme visitantes em novos alunos."
+    },
+    {
+      slug: "site-restaurantes-bares-rs",
+      title: "Sites para Restaurantes e Bares no RS: Cardápios Digitais que Vendem",
+      description: "Como um site profissional pode aumentar as reservas e pedidos em bares e restaurantes.",
+      date: "18 de Março, 2026",
+      image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&h=500&fit=crop&q=80",
+      content: "Seu cardápio deve ser visto de forma prática no celular. Tenha um site de alto padrão."
+    },
+    {
+      slug: "como-escolher-desenvolvedor-rs",
+      title: "Como Escolher um Desenvolvedor Web Confiável no Rio Grande do Sul",
+      description: "Dicas de segurança e qualidade para garantir que seu site entregue os resultados prometidos.",
+      date: "25 de Março, 2026",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop&q=80",
+      content: "Fuja de promessas vazias e sites amadores. Saiba o que avaliar antes de contratar um desenvolvedor para sua empresa no RS."
+    },
+    {
+      slug: "site-clinica-estetica-rs",
+      title: "Sites para Clínicas de Estética no RS: Realce sua Marca com Profissionalismo",
+      description: "Como um site elegante transforma clínicas de estética em centros de referência na sua cidade.",
+      date: "01 de Abril, 2026",
+      image: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=800&h=500&fit=crop&q=80",
+      content: "Estética é imagem. Seu site deve ser a vitrine do seu trabalho."
+    },
+    {
+      slug: "site-lojas-roupas-rs",
+      title: "Sites para Lojas de Roupas no RS: Tendência Digital para seu Comércio",
+      description: "Impulsione as vendas da sua loja de roupas com um site rápido e com catálogo visual.",
+      date: "08 de Abril, 2026",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=500&fit=crop&q=80",
+      content: "Moda pede visual. Tenha uma vitrine online que converte seguidores em clientes."
+    },
+    {
+      slug: "site-eletronicos-rs",
+      title: "Sites para Lojas de Eletrônicos no RS: Vendas com Segurança e Confiança",
+      description: "Destaque seus produtos tecnológicos com um site rápido e focado em orçamentos.",
+      date: "15 de Abril, 2026",
+      image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&h=500&fit=crop&q=80",
+      content: "A tecnologia muda rápido, e seu site deve estar atualizado. Venda mais eletrônicos hoje."
+    },
+    {
+      slug: "site-turismo-agencias-rs",
+      title: "Sites para Agências de Viagens e Turismo no RS: Destino de Sucesso",
+      description: "Como um site institucional pode transformar sua agência de turismo em referência regional.",
+      date: "22 de Abril, 2026",
+      image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=500&fit=crop&q=80",
+      content: "Viagem é sonho. Seu site deve despertar o desejo de explorar novos destinos com sua agência."
+    },
+    {
+      slug: "site-servicos-contabilidade-rs",
+      title: "Sites para Escritórios de Contabilidade no RS: Autoridade e Confiança",
+      description: "Sites focados em credibilidade para contadores e escritórios de contabilidade.",
+      date: "29 de Abril, 2026",
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=500&fit=crop&q=80",
+      content: "Contabilidade exige seriedade. Nosso design foca na autoridade do seu escritório."
+    },
+    {
+      slug: "site-lojas-presentes-rs",
+      title: "Sites para Lojas de Presentes no RS: O Presente Ideal a um Clique",
+      description: "Como facilitar a escolha de presentes com um catálogo online integrado ao seu WhatsApp.",
+      date: "06 de Maio, 2026",
+      image: "https://images.unsplash.com/photo-1513201097608-20f4f9102264?w=800&h=500&fit=crop&q=80",
+      content: "Presentes precisam ser vistos. Exponha sua loja com qualidade e venda muito mais."
+    },
+    {
+      slug: "site-escritorios-arquitetura-rs",
+      title: "Sites para Arquitetos no RS: Projetos de Alto Padrão em Exposição",
+      description: "Sites para arquitetos que valorizam o design e querem mostrar seu portfólio de projetos.",
+      date: "13 de Maio, 2026",
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&h=500&fit=crop&q=80",
+      content: "Arquitetura é visual. Seu site deve refletir a qualidade e o estilo dos seus projetos."
+    },
+    {
+      slug: "como-vender-pelo-google-maps-rs",
+      title: "Como Vender Mais pelo Google Maps no Rio Grande do Sul",
+      description: "Guia prático para otimizar sua presença no Google Meu Negócio e atrair clientes próximos.",
+      date: "20 de Maio, 2026",
+      image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=800&h=500&fit=crop&q=80",
+      content: "O Google Maps é a ferramenta mais poderosa para negócios locais. Aprenda a dominar."
+    },
+    {
+      slug: "site-oficinas-arte-RS",
+      title: "Sites para Ateliês e Oficinas de Arte no RS: Exponha Sua Criatividade",
+      description: "Sites institucionais para artistas que querem vender seu trabalho online.",
+      date: "27 de Maio, 2026",
+      image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&h=500&fit=crop&q=80",
+      content: "Arte merece ser vista. Exponha suas criações com um site institucional moderno."
+    },
+    {
+      slug: "site-servicos-juridicos-rs",
+      title: "Sites para Serviços Jurídicos no RS: Aumente sua presença digital",
+      description: " Sites profissionais para advogados que desejam expandir seus contatos de forma digital.",
+      date: "03 de Junho, 2026",
+      image: "https://images.unsplash.com/photo-1589829545856-d138a379435b?w=800&h=500&fit=crop&q=80",
+      content: "Presença digital é fundamental para a advocacia moderna. Tenha seu site."
+    },
+    {
+      slug: "site-academias-pilates-rs",
+      title: "Sites para Estúdios de Pilates no RS: Bem-estar na palma da mão",
+      description: "Sites que facilitam o agendamento de aulas de pilates no seu estúdio.",
+      date: "10 de Junho, 2026",
+      image: "https://images.unsplash.com/photo-1518611012108-816976f8a4f6?w=800&h=500&fit=crop&q=80",
+      content: "Pilates é saúde. Seu site deve passar essa tranquilidade desde o primeiro clique."
+    },
+    {
+      slug: "site-lojas-moveis-planejados-rs",
+      title: "Sites para Móveis Planejados no RS: Projetos de Sonho Expostos",
+      description: "Sites focados em exibir projetos de móveis planejados de alta qualidade.",
+      date: "17 de Junho, 2026",
+      image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&h=500&fit=crop&q=80",
+      content: "Móveis planejados precisam ser exibidos com detalhes. O site ideal para mostrar tudo."
+    },
+    {
+      slug: "site-servicos-paisagismo-rs",
+      title: "Sites para Paisagismo no RS: Transforme Jardins em Espaços de Lazer",
+      description: "Como mostrar seus projetos de paisagismo e atrair clientes de alto padrão.",
+      date: "24 de Junho, 2026",
+      image: "https://images.unsplash.com/photo-1416879595882-3373a0480a5b?w=800&h=500&fit=crop&q=80",
+      content: "Paisagismo é transformação. Seu site mostra o antes e o depois de forma impecável."
+    },
+    {
+      slug: "site-clinica-psicologia-rs",
+      title: "Sites para Psicólogos no RS: Acolhimento e Privacidade Online",
+      description: "Sites institucionais para clínicas de psicologia focados em acolhimento e marcação de consultas.",
+      date: "01 de Julho, 2026",
+      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop&q=80",
+      content: "Psicologia pede acolhimento. Seu site transmite esse sentimento desde o primeiro contato."
+    },
+    {
+      slug: "site-lojas-instrumentos-musicais-rs",
+      title: "Sites para Lojas de Instrumentos Musicais no RS: O Som do Sucesso",
+      description: "Mostre seu catálogo de instrumentos com um site institucional rápido e prático.",
+      date: "08 de Julho, 2026",
+      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=500&fit=crop&q=80",
+      content: "Instrumentos musicais precisam ser vistos. Tenha seu catálogo sempre disponível."
+    },
+    {
+      slug: "site-servicos-limpeza-estofados-rs",
+      title: "Sites para Limpeza de Estofados no RS: Renove a Sua Casa",
+      description: "Como atrair clientes que buscam limpeza especializada de sofás e estofados.",
+      date: "15 de Julho, 2026",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop&q=80",
+      content: "Clientes buscam soluções rápidas. Seu site é a resposta para a limpeza do estofado."
+    },
+    {
+      slug: "site-fotografia-casamento-rs",
+      title: "Sites para Fotógrafos de Casamento no RS: Eternize Memórias",
+      description: "Sites para fotógrafos que buscam destacar seu portfólio de casamentos e eventos.",
+      date: "22 de Julho, 2026",
+      image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=500&fit=crop&q=80",
+      content: "Fotos de casamento precisam ser memoráveis. Seu site é o palco ideal."
+    },
+    {
+      slug: "site-lojas-artigos-festa-rs",
+      title: "Sites para Artigos de Festa no RS: Tudo para sua Comemoração",
+      description: "Exponha artigos de decoração, balões e acessórios de festa em um site moderno.",
+      date: "29 de Julho, 2026",
+      image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=500&fit=crop&q=80",
+      content: "Festas são alegria. Mostre seu catálogo de forma prática e divertida."
+    },
+    {
+      slug: "site-consultoria-negocios-rs",
+      title: "Sites para Consultoria de Negócios no RS: Expert em Crescimento",
+      description: "Sites para consultores que querem atrair novos clientes com autoridade.",
+      date: "05 de Agosto, 2026",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop&q=80",
+      content: "Consultoria exige resultados. O site institucional demonstra o valor do seu conhecimento."
+    },
+    {
+      slug: "site-clinica-odontologia-rs",
+      title: "Sites para Odontologia no RS: Sorrisos Perfeitos Começam no Google",
+      description: "Aumente o número de agendamentos para sua clínica odontológica com um site profissional.",
+      date: "12 de Agosto, 2026",
+      image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&h=500&fit=crop&q=80",
+      content: "Sorrisos são a melhor vitrine. Seu site precisa mostrar qualidade e confiança."
+    },
+    {
+      slug: "site-personal-organizer-rs",
+      title: "Sites para Personal Organizer no RS: Organize seu Espaço e sua Vida",
+      description: "Como um site pode transformar uma personal organizer em referência de organização.",
+      date: "19 de Agosto, 2026",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop&q=80",
+      content: "Personal Organizer cuida da ordem. Seu site deve transmitir exatamente essa paz."
+    },
+    {
+      slug: "site-criacao-sites-rs-2026",
+      title: "Criação de Sites Profissionais no RS: Tendências para 2026",
+      description: "Veja o que há de mais moderno em design e tecnologia para sites de negócios em 2026.",
+      date: "26 de Agosto, 2026",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80",
+      content: "Esteja à frente da concorrência. Conheça as estratégias para o mercado digital no RS em 2026."
     }
+
   ],
   seo: {
     ogImage: "https://images.unsplash.com/photo-1638482856830-16b0e15fcf2c?w=1200&h=630&fit=crop&q=80",
